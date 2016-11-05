@@ -29,6 +29,11 @@ class Game extends FlxState {
 
         switchRoom("Cargo");
 
+        nameText = new FlxText(0,FlxG.height-48,FlxG.width);
+        nameText.setFormat("assets/fonts/PIXELADE.TTF");
+        nameText.size = 40;
+        add(nameText);
+
         add(new FlxSprite(0,880).makeGraphic(FlxG.width,20,0xffffffff));
 
         super.create();
@@ -47,12 +52,14 @@ class Game extends FlxState {
             return o.isCursorOverPixels();
         });
         if(k != null) {
-            trace(k.n);
+            nameText.text = k.n;
             if(FlxG.mouse.justPressed)
                 k.v_look();
             if(FlxG.mouse.justPressedRight)
                 k.v_use();
         }
+        else
+            nameText.text = "";
     }
 
     public function switchRoom(R) {
