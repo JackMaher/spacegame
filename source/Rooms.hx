@@ -70,4 +70,8 @@ class Hallway1 extends Room {
                    new SmallObject(40,0)];
     }
 
+    function enter() {
+        cast(get("sodsbury"), Character).walkToObject("player");
+    }
+
 }
