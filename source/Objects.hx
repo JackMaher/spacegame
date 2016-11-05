@@ -84,3 +84,8 @@ class Object extends FlxSprite {
 
 }
 
+class Crewmember extends Object {
+
+}
+
+
