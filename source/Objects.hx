@@ -3,12 +3,14 @@ using Objects;
 using StringTools;
 using Lambda;
 using Reflect;
+using Characters;
 using Rooms;
 using Type;
 import flixel.FlxSprite;
 import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import flixel.util.FlxTimer;
 
 class Key extends SmallObject {
 }
@@ -24,6 +26,7 @@ class Object extends FlxSprite {
     public var n(get,never):String;
     public var customName:String="";
     public var currentRoom(get,never):Room;
+    public var player(get,never):Player;
     var gameX:Int;
     var gameY:Int;
 
@@ -61,9 +64,12 @@ class Object extends FlxSprite {
         return getClass().getClassName().toLowerCase();
     }
 
-    public function get_currentRoom() {
+    public function get_currentRoom()
         return cast(FlxG.state,Game).currentRoom;
-    }
+
+
+    public function get_player()
+        return cast(currentRoom.getCharacter("player"),Player);
 
     //Work out where this object should be placed.
     function roomPos(X:Float,Y:Float) {
@@ -80,6 +86,21 @@ class Object extends FlxSprite {
         return pixelsOverlapPoint(adjustedCursorPos);
     }
 
+    public function wait(seconds:Float, then:Void->Void) {
+        new FlxTimer().start(seconds, function(t)then());
+    }
 
 
 }
+
+class Crewmember extends Object {
+    function look() {
+        player.walkToObject("crewmember",
+            0, whh);
+    }
+
+    function whh() player.say("What happened to the crew?");
+
+}
+
+

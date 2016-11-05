@@ -1,31 +1,80 @@
 import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import flixel.FlxG;
+using Characters;
 
 class Speech extends FlxSpriteGroup {
-    var text:FlxText;
+    public var text:FlxText;
     var age:Float=0;
-    var speeches:Array<Speech>;
+    var maxAge:Float = 3;
+    var char:Character;
     public static var SIZE:Int = 48;
-    public function new(s:String,speeches:Array<Speech>):Void {
+    public function new(s:String,char:Character):Void {
         super();
-        pixelPerfectRender = false;
         text = new FlxText(0,0,1000,s);
         text.setFormat("assets/fonts/PIXELADE.TTF");
         text.size = 40;
         text.alignment=CENTER;
         add(text);
         text.setBorderStyle(OUTLINE,0xff000000,2);
-        this.speeches = speeches;
-        visible = false;
+        this.char = char;
+        text.fieldWidth = text.textField.textWidth + 10;
+        text.updateHitbox();
+        text.visible = false;
     }
     override public function update(d) {
-        visible = true;
         age+=d;
-        if(age > 5) {
+        if(age > maxAge) {
             kill();
-            speeches.remove(this);
+            char.speeches.remove(this);
         }
         super.update(d);
     }
+}
+
+class DialogOption extends Speech {
+
+    var then:Void->Void;
+    var num:Int;
+    var content:String;
+
+    public function new(s:String, char:Character,
+            num:Int, ?then:Void->Void = null) {
+        super('$num. $s',char);
+        maxAge = 9999999;
+        content = s;
+        char.dialogs++;
+        this.then = then;
+        this.num  = num;
+    }
+
+    public override function update(d) {
+        super.update(d);
+
+        var opts = [null,FlxG.keys.justPressed.ONE,
+                    FlxG.keys.justPressed.TWO,
+                    FlxG.keys.justPressed.THREE,
+                    FlxG.keys.justPressed.FOUR,
+                    FlxG.keys.justPressed.FIVE];
+
+        if(opts[num] || (FlxG.mouse.justPressed &&
+            text.overlapsPoint(FlxG.mouse.getPosition())))
+            hit();
+
+    }
+
+    function hit() {
+        for(s in char.speeches) {
+            if(s != this) {
+                s.kill();
+            }
+        }
+        maxAge = 3;
+        age = 0;
+        char.dialogs=0;
+        char.speeches = [this];
+        text.text = content;
+        if(then != null) then();
+    }
+
 }
