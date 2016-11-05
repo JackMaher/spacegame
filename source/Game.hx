@@ -49,10 +49,13 @@ class Game extends FlxState {
         if(FlxG.keys.justPressed.F) currentRoom.getCharacter("player").say("Hello");
 
         var k = currentRoom.objects.find(function(o) {
-            return o.isCursorOverPixels();
+            return o.n != "player" && o.isCursorOverPixels();
         });
         if(k != null) {
             nameText.text = k.n;
+            nameText.offset.x = 0;
+            nameText.x = k.x;
+            nameText.y = k.y - 48;
             if(FlxG.mouse.justPressed)
                 k.v_look();
             if(FlxG.mouse.justPressedRight)
