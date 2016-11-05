@@ -27,7 +27,7 @@ class Object extends FlxSprite {
     var gameY:Int;
 
 
-    public function new(X, Y,?asset:String) {
+    public function new(X:Int, Y:Int,?asset:String) {
         super();
         gameX = X;
         gameY = Y;

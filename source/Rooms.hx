@@ -48,12 +48,18 @@ class Room extends Object {
             y:Game.ROOM_HEIGHT/2-height/2+Game.ROOM_TOP};
     }
 
-    public function get(O:String):Dynamic {
-        trace(objects.map(function(o)return o.n));
+    public function get(O:String):Object {
         var k = objects.find(function(o){return o.n==O;});
         if(k == null) throw ("no object "+O+" in room!");
         trace(k.n + ", " + k.x);
         return k;
+    }
+
+    public function getCharacter(O:String):Character {
+        var k = objects.find(function(o){return o.n==O;});
+        if(k == null) throw ("no object "+O+" in room!");
+        trace(k.n + ", " + k.x);
+        return cast(k,Character);
     }
 
 }
@@ -69,8 +75,17 @@ class Hallway1 extends Room {
                    new Player(20,0),
                    new SmallObject(40,0)];
     }
+<<<<<<< HEAD
 /*    function enter() {
         get("sodsbury").walkToObject("player");
     }
 */
+=======
+
+    function enter() {
+        getCharacter("sodsbury").walkToObject("player");
+    }
+
+
+>>>>>>> origin/master
 }
