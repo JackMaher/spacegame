@@ -18,6 +18,7 @@ class Game extends FlxState {
     public static var ROOM_TOP:Int;
     public static var SCALE_FACTOR:Int = 8;
     public var currentRoom:Room;
+    var nameText:FlxText;
     var rooms:Map<String, Room> = new Map();
 
     override public function create():Void {
