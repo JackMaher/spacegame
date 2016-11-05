@@ -75,17 +75,19 @@ class Hallway1 extends Room {
                    new Player(20,0),
                    new SmallObject(40,0)];
     }
-<<<<<<< HEAD
-/*    function enter() {
-        get("sodsbury").walkToObject("player");
-    }
-*/
-=======
-
     function enter() {
         getCharacter("sodsbury").walkToObject("player");
     }
 
+}
 
->>>>>>> origin/master
+class Cargo extends Room{
+    public function new(){
+        super();
+    }
+    override public function create (){
+        objects = [new Player(30,32),
+                    new Crewmember(4,34),];
+    }
+
 }

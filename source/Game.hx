@@ -25,7 +25,7 @@ class Game extends FlxState {
 
         add(R.inv); // adds the inventory to the screen
 
-        switchRoom("Room");
+        switchRoom("Cargo");
 
         add(new FlxSprite(0,880).makeGraphic(FlxG.width,20,0xffffffff));
 
