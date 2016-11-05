@@ -10,6 +10,7 @@ import Objects;
 import Rooms;
 using Type;
 using Reflect;
+using Lambda;
 
 class Game extends FlxState {
 
@@ -40,6 +41,17 @@ class Game extends FlxState {
         if(FlxG.keys.justPressed.Q) Sys.exit(0);
 
         if(FlxG.keys.justPressed.F) currentRoom.getCharacter("player").say("Hello");
+
+        var k = currentRoom.objects.find(function(o) {
+            return o.isCursorOverPixels();
+        });
+        if(k != null) {
+            trace(k.n);
+            if(FlxG.mouse.justPressed)
+                k.v_look();
+            if(FlxG.mouse.justPressedRight)
+                k.v_use();
+        }
     }
 
     public function switchRoom(R) {

@@ -8,6 +8,7 @@ using Type;
 import flixel.FlxSprite;
 import flixel.FlxBasic;
 import flixel.FlxG;
+import flixel.math.FlxPoint;
 
 class Key extends SmallObject {
 }
@@ -70,10 +71,16 @@ class Object extends FlxSprite {
                 y:currentRoom.y + Y*Game.SCALE_FACTOR};
     }
 
-}
+    public function isCursorOverPixels():Bool {
+        var adjustedx = this.getMidpoint().x +
+            (FlxG.mouse.x - this.getMidpoint().x) / this.scale.x;
+        var adjustedy = this.getMidpoint().y +
+            (FlxG.mouse.y - this.getMidpoint().y) / this.scale.y;
+        var adjustedCursorPos = new FlxPoint(adjustedx, adjustedy);
+        return pixelsOverlapPoint(adjustedCursorPos);
+    }
 
-class Crewmember extends Object {
-    
-}
 
+
+}
 

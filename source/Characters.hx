@@ -32,7 +32,7 @@ class Character extends SmallObject {
         for(i in 0...speeches.length) {
             var s = speeches[i];
             s.x = x+width/2;
-            s.y = y-(speeches.length-i)*Speech.SIZE;
+            s.y = y-(0.3+speeches.length-i)*Speech.SIZE;
             s.updateHitbox();
             s.offset.x = s.width/2;//+ (s.x % Game.SCALE_FACTOR);
         }
@@ -60,12 +60,11 @@ class Player extends Character {
 
     public function new(x,y):Void {
 
-
         super(x, y);
 
         loadGraphic("assets/images/player.png", true, 14,18);
         animation.add("lr", [0,1,2], 6, false);
-        animation.add("idle", [4,5], 3,false);
+        animation.add("idle", [3,4], 3,false);
     }
 
     private function movement():Void{
@@ -82,30 +81,27 @@ class Player extends Character {
 
         if (_left || _right){
 
+            moving = true;
+
             if (_left){
-                //x -= 5;
-                moving = true;
-                facing = flixel.FlxObject.RIGHT;
+                x -= 5;
                 flipX = true;
             }
             else if (_right){
-                //x += 5;
-                moving = true;
-                facing = flixel.FlxObject.LEFT;
+                x += 5;
                 flipX = false;
             }
-
-                if ((moving) && touching == flixel.FlxObject.NONE){
-                /*_sndStep.play();*/
-                switch(facing){
-                    case flixel.FlxObject.LEFT, flixel.FlxObject.RIGHT:
-                        animation.play("lr");
-
-                    }
-
-                }
-            }
         }
+
+        if (moving){
+            /*_sndStep.play();*/
+            animation.play("lr");
+        }
+        else {
+            animation.play("idle");
+        }
+    }
+
     override public function update (d){
         super.update(d);
         movement();

@@ -16,13 +16,15 @@ class Speech extends FlxSpriteGroup {
         add(text);
         text.setBorderStyle(OUTLINE,0xff000000,2);
         this.speeches = speeches;
+        visible = false;
     }
     override public function update(d) {
-        super.update(d);
+        visible = true;
         age+=d;
         if(age > 5) {
             kill();
             speeches.remove(this);
         }
+        super.update(d);
     }
 }
