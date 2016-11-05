@@ -85,6 +85,13 @@ class Object extends FlxSprite {
 }
 
 class Crewmember extends Object {
+    function look(){
+        currentRoom.getCharacter("player").say ("What happen to the crew?");
+    }
+    public function new(x,y){
+        super(x,y);
+        customName = "Crewmemebr";
+    }
 
 }
 
