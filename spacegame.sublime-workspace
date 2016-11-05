@@ -11,9 +11,9 @@
 			"file": "source/Main.hx",
 			"settings":
 			{
-				"buffer_size": 196,
+				"buffer_size": 218,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -23,6 +23,15 @@
 				"buffer_size": 405,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "source/Rooms.hx",
+			"settings":
+			{
+				"buffer_size": 1646,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -109,7 +118,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -118,15 +127,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 196,
+						"buffer_size": 218,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								196,
-								196
+								0,
+								0
 							]
 						],
 						"settings":
@@ -138,7 +147,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -154,8 +163,8 @@
 						"selection":
 						[
 							[
-								237,
-								237
+								241,
+								241
 							]
 						],
 						"settings":
@@ -165,6 +174,37 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "source/Rooms.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1646,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1317,
+								1317
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 540.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
