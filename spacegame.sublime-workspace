@@ -11,7 +11,7 @@
 			"file": "source/Main.hx",
 			"settings":
 			{
-				"buffer_size": 195,
+				"buffer_size": 196,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -109,7 +109,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -118,15 +118,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 195,
+						"buffer_size": 196,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								195,
-								195
+								196,
+								196
 							]
 						],
 						"settings":
@@ -138,7 +138,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -167,7 +167,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
