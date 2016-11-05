@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxG;
 using Objects;
 using Rooms;
 
@@ -7,9 +8,12 @@ class Character extends SmallObject {
 
     var walkSpeed:Float = 2.5;
     var walk:Null<{pos:Float,then:Void->Void}> = null;
+    var speeches:Array<Speech>=[];
 
     public function new(x:Int,y:Int):Void {
         super(x,y);
+        say("hi");
+        say("hi2");
     }
 
     override public function update(d):Void {
@@ -23,7 +27,15 @@ class Character extends SmallObject {
         }
 
         updateHitbox();
-        offset.x +=(x % Game.SCALE_FACTOR);
+        offset.x +=((x-currentRoom.x) % Game.SCALE_FACTOR);
+
+        for(i in 0...speeches.length) {
+            var s = speeches[i];
+            s.x = x+width/2;
+            s.y = y-(speeches.length-i)*Speech.SIZE;
+            s.updateHitbox();
+            s.offset.x = s.width/2;//+ (s.x % Game.SCALE_FACTOR);
+        }
 
         super.update(d);
 
@@ -38,6 +50,10 @@ class Character extends SmallObject {
         walk = {pos:pos, then:then};
     }
 
+    public function say(s:String) {
+        speeches.push(cast FlxG.state.add(new Speech(s,speeches)));
+    }
+
 }
 
 class Player extends Character {
@@ -47,7 +63,7 @@ class Player extends Character {
 
         super(x, y);
 
-        loadGraphic("assets/images/player.png", true, 13,18);
+        loadGraphic("assets/images/player.png", true, 14,18);
         animation.add("lr", [0,1,2], 6, false);
         animation.add("idle", [4,5], 3,false);
     }
@@ -67,14 +83,16 @@ class Player extends Character {
         if (_left || _right){
 
             if (_left){
-                x -= 5;
+                //x -= 5;
                 moving = true;
                 facing = flixel.FlxObject.RIGHT;
+                flipX = true;
             }
             else if (_right){
-                x += 5;
+                //x += 5;
                 moving = true;
                 facing = flixel.FlxObject.LEFT;
+                flipX = false;
             }
 
                 if ((moving) && touching == flixel.FlxObject.NONE){

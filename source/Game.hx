@@ -38,6 +38,8 @@ class Game extends FlxState {
         if(FlxG.keys.justPressed.ONE) switchRoom("Room");
         if(FlxG.keys.justPressed.TWO) switchRoom("Hallway1");
         if(FlxG.keys.justPressed.Q) Sys.exit(0);
+
+        if(FlxG.keys.justPressed.F) currentRoom.getCharacter("player").say("Hello");
     }
 
     public function switchRoom(R) {
