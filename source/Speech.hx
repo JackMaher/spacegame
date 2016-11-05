@@ -9,6 +9,7 @@ class Speech extends FlxSpriteGroup {
     public static var SIZE:Int = 48;
     public function new(s:String,speeches:Array<Speech>):Void {
         super();
+        pixelPerfectRender = false;
         text = new FlxText(0,0,1000,s);
         text.setFormat("assets/fonts/PIXELADE.TTF");
         text.size = 40;
