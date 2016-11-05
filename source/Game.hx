@@ -54,6 +54,7 @@ class Game extends FlxState {
         if(k != null) {
             nameText.text = k.n;
             nameText.offset.x = 0;
+            nameText.setBorderStyle(OUTLINE,0xff000000,2);
             nameText.x = k.x;
             nameText.y = k.y - 48;
             if(FlxG.mouse.justPressed)
