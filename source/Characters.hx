@@ -2,13 +2,15 @@ package;
 
 import flixel.FlxG;
 using Objects;
+using Speech;
 using Rooms;
 
 class Character extends SmallObject {
 
-    var walkSpeed:Float = 2.5;
+    var walkSpeed:Float = 5;
     var walk:Null<{pos:Float,then:Void->Void}> = null;
-    var speeches:Array<Speech>=[];
+    public var speeches:Array<Speech>=[];
+    public var dialogs:Int = 0;
 
     public function new(x:Int,y:Int):Void {
         super(x,y);
@@ -31,27 +33,46 @@ class Character extends SmallObject {
 
         for(i in 0...speeches.length) {
             var s = speeches[i];
-            s.x = x+width/2;
+            s.text.visible = true;
+            s.x = x+width/2-s.width/2;
             s.y = y-(0.3+speeches.length-i)*Speech.SIZE;
-            s.updateHitbox();
-            s.offset.x = s.width/2;//+ (s.x % Game.SCALE_FACTOR);
         }
 
         super.update(d);
 
     }
 
-    public function walkToObject(ne:String, ?then:Void->Void):Void {
-        walkTo(currentRoom.get(ne).x, then);
+    public function walkToObject(ne:String, ?dist:Null<Float> = 0, ?then:Void->Void):Void {
+        var ob = currentRoom.get(ne);
+        var nx = 0.0;
+            if(x < ob.x - dist)
+                nx = ob.x - dist;
+            else if(x > ob.x + ob.width + dist)
+                nx = ob.x + ob.width + dist;
+            else
+                nx = x;
+        walkTo(nx, then);
     }
 
     public function walkTo(pos:Float, ?then:Void->Void):Void {
-        trace("walking to " + pos);
         walk = {pos:pos, then:then};
     }
 
     public function say(s:String) {
-        speeches.push(cast FlxG.state.add(new Speech(s,speeches)));
+        speeches.push(cast FlxG.state.add(new Speech(s,this)));
+    }
+
+    public function option(s:String, ?then:Void->Void):Void {
+        if(dialogs == 0) {
+            for(s in speeches)
+                s.kill();
+            speeches = [];
+        }
+        speeches.push(cast FlxG.state.add(new DialogOption(
+            s,this,speeches.length+1,then)));
+    }
+    public function endOptions() {
+        dialogs = 0;
     }
 
 }
@@ -67,30 +88,33 @@ class Player extends Character {
         animation.add("idle", [3,4], 3,false);
     }
 
-    private function movement():Void{
-        var _left:Bool = false;
-        var _right:Bool = false;
+    private function movement():Void {
 
-        _left = flixel.FlxG.keys.anyPressed(["LEFT","A"]);
-        _right = flixel.FlxG.keys.anyPressed(["RIGHT","D"]);
+        var _left  = false;
+        var _right = false;
 
-        var moving:Bool = false;
+        if(walk != null) {
+            if(x > walk.pos) _left = true;
+            if(x < walk.pos) _right = true;
+        }
+        else {
+            if(flixel.FlxG.keys.anyPressed(["LEFT","A"])) _left = true;
+            if(flixel.FlxG.keys.anyPressed(["RIGHT","D"])) _right = true;
+        }
+
+        var moving:Bool = _left || _right;
 
         if (_left && _right)
             _left = _right = false;
 
-        if (_left || _right){
 
-            moving = true;
-
-            if (_left){
-                x -= 5;
-                flipX = true;
-            }
-            else if (_right){
-                x += 5;
-                flipX = false;
-            }
+        if (_left){
+            if(walk==null) x -= 5;
+            flipX = true;
+        }
+        else if (_right){
+            if(walk==null) x += 5;
+            flipX = false;
         }
 
         if (moving){
