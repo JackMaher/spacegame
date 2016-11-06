@@ -217,10 +217,10 @@ class Object extends FlxSprite {
         return pixelsOverlapPoint(adjustedCursorPos);
     }
 
-    public function pixelDistance(Other:Object) {
-        return Math.min(
-            Math.ceil(Math.abs(x+width-Other.x)/Game.SCALE_FACTOR),
-            Math.ceil(Math.abs(Other.x+Other.width-x)/Game.SCALE_FACTOR));
+    public function pixelDistance(Other:Object):Int {
+        if(x+width>Other.x && Other.x+Other.width > x) return 0;
+        else if(x+width<=Other.x) return cast (Other.x-x-width)/Game.SCALE_FACTOR;
+        else                      return cast (x-Other.x-Other.width)/Game.SCALE_FACTOR;
     }
 
 
