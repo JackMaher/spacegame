@@ -48,8 +48,8 @@ class Character extends SmallObject {
     public function walkToObject(ne:String, ?dist:Null<Float> = 0, ?then:Void->Void):Void {
         var ob = currentRoom.get(ne);
         var nx = 0.0;
-            if(x < ob.x - dist)
-                nx = ob.x - dist;
+            if(x < ob.x - dist - width)
+                nx = ob.x - dist - width;
             else if(x > ob.x + ob.width + dist)
                 nx = ob.x + ob.width + dist;
             else
@@ -138,6 +138,21 @@ class Trigger extends Object {
 
 }
 
+class Block extends Object {
+
+    public function new(X:Int) {
+        super(X,0,"block");
+        customName="";
+        immovable=true;
+    }
+
+    public override function update(d):Void {
+        FlxG.collide(this,game.layers.get(CHAR));
+        super.update(d);
+    }
+
+}
+
 class Room extends Object {
 
     public var objects:Array<Object> = [];
@@ -189,7 +204,6 @@ class Room extends Object {
     public function getCharacter(O:String):Character {
         var k = objects.find(function(o){return o.n==O;});
         if(k == null) throw ("no object "+O+" in room!");
-        trace(k.n + ", " + k.x);
         return cast(k,Character);
     }
 
