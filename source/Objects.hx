@@ -23,11 +23,17 @@ class Crewmember extends Object {
 
 class Crate extends Object {
     function look(){
-        player.say("I think there is a hammer in here");
-
+        
+        if (pixelDistance(player) < 5){
         R.inv.add(new Hammer(0,0));
         currentRoom.addObject(new EmptyCrate(106, 39));
         currentRoom.remObject(this);
+        player.say("Gotit");
+
+        }
+        else{
+            player.say("I think there is a hammer in here, but I cant reach it");
+        }
     }
 
 }
