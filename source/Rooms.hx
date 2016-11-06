@@ -87,7 +87,8 @@ class Cargo extends Room{
     }
     override public function create (){
         objects = [new Player(30,32),
-                    new Crewmember(4,34),];
+                    new Crewmember(4,34),
+                    new Crate(106,39),];
     }
 
 }

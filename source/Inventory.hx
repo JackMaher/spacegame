@@ -3,7 +3,7 @@ import flixel.FlxBasic;
 
 class Inventory extends FlxBasic {
 
-    public var members:Array<SmallObject> = [];
+    public var objects:Array<SmallObject> = [];
     public static inline var ROWS:Int = 1;
     public static inline var COLS:Int = 5;
     public static inline var SLOT_SIZE:Int = 32;
@@ -20,16 +20,16 @@ class Inventory extends FlxBasic {
     }
 
     public function add(o:SmallObject) {
-        if(members.indexOf(o) != -1) {
+        if(objects.indexOf(o) != -1) {
             trace(o.n + " already in inventory!");
             return;
         }
-        if(members.length >= ROWS*COLS) {
+        if(objects.length >= ROWS*COLS) {
             trace("Inventory full!");
             return;
         }
 
-        var k = members.push(o);
+        var k = objects.push(o);
         position(o,k-1);
     }
 

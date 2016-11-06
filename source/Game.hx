@@ -48,7 +48,9 @@ class Game extends FlxState {
 
         if(FlxG.keys.justPressed.F) currentRoom.getCharacter("player").say("Hello");
 
-        var k = currentRoom.objects.find(function(o) {
+        var os = currentRoom.objects;
+        for(o in R.inv.objects) os.push(o);
+        var k = os.find(function(o) {
             return o.n != "player" && o.isCursorOverPixels();
         });
         if(k != null) {

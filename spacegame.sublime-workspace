@@ -37,7 +37,7 @@
 			"file": "source/Game.hx",
 			"settings":
 			{
-				"buffer_size": 1857,
+				"buffer_size": 2285,
 				"line_ending": "Windows"
 			}
 		},
@@ -54,7 +54,7 @@
 			"file": "source/Objects.hx",
 			"settings":
 			{
-				"buffer_size": 2134,
+				"buffer_size": 2329,
 				"line_ending": "Windows"
 			}
 		},
@@ -62,7 +62,7 @@
 			"file": "source/Characters.hx",
 			"settings":
 			{
-				"buffer_size": 2549,
+				"buffer_size": 3239,
 				"line_ending": "Windows"
 			}
 		}
@@ -218,15 +218,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1857,
+						"buffer_size": 2285,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								628,
-								628
+								0,
+								0
 							]
 						],
 						"settings":
@@ -280,15 +280,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2134,
+						"buffer_size": 2329,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1699,
-								1699
+								1373,
+								1373
 							]
 						],
 						"settings":
@@ -299,7 +299,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 702.0,
+						"translation.y": 1242.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -311,15 +311,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2549,
+						"buffer_size": 3239,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2243,
+								2243
 							]
 						],
 						"settings":
@@ -330,7 +330,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1674.0,
+						"translation.y": 1350.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
