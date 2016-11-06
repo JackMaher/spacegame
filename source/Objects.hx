@@ -45,6 +45,9 @@ class EmptyCrate extends Object {
 }
 
 class Hammer extends SmallObject{
+    function look(){
+        player.say("This hammer could pack quite a punch");
+    }
 
 }
 
@@ -56,8 +59,33 @@ class LeftDoor extends Object {
     };
 }
 
-class CargoDoor extends Door {
+class RightDoor extends Object {
     function new(x,y) {
+        super(x,y);
+        customName = "";
+        layer = FORE;
+    }
+}
+
+class RoomTrigger extends Trigger{
+    var newRoom:String;
+    var newX:Int;
+    var newY:Int;
+
+    function new (x,nRoom,nX,nY){
+        super (x);
+        newRoom = nRoom;
+        newX = nX;
+        newY = nY;
+
+    }
+    function trigger(){
+        game.switchRoom(newRoom, newX, newY);
+    }
+}
+
+class ShipDoor extends Door {
+    function new(x,y,nRoom,nX,nY) {
         super(x,y,"cargodoor");
 
         //Graphics stuff
@@ -70,9 +98,9 @@ class CargoDoor extends Door {
         updateHitbox();
 
         // Essential bits of info
-        newRoom = "Hallway5";
-        newPlayerX = 47;
-        newPlayerY = 15;
+        newRoom = nRoom ;
+        newPlayerX = nX;
+        newPlayerY = nY;
     }
 }
 
