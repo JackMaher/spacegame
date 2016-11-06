@@ -62,7 +62,7 @@ class Game extends FlxState {
         super.update(elapsed);
 
         if(FlxG.keys.justPressed.ONE) switchRoom("Room");
-        if(FlxG.keys.justPressed.TWO) switchRoom("Cargo");
+        if(FlxG.keys.justPressed.TWO) switchRoom("Hallway5");
         if(FlxG.keys.justPressed.Q) Sys.exit(0);
 
         if(FlxG.keys.justPressed.F) currentRoom.getCharacter("player").say("Hello");

@@ -28,7 +28,7 @@ class Crate extends Object {
         R.inv.add(new Hammer(0,0));
         currentRoom.addObject(new EmptyCrate(106, 39));
         currentRoom.remObject(this);
-        player.say("I reached into the crate and grabbed a hammer");
+        player.say("Ohhh a hammer!");
 
         }
         else{
