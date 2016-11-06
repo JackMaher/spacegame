@@ -70,7 +70,7 @@ class Sodsbury extends Character {
 
     public override function update(d){
         super.update(d);
-        flipX = (walk != null && x > walk.pos);
+        flipX = !(walk != null && x > walk.pos);
     }
 
     function walk1(){
