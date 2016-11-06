@@ -1,7 +1,9 @@
 import Objects;
 import flixel.FlxBasic;
+import flixel.group.FlxGroup;
+using Lambda;
 
-class Inventory extends FlxBasic {
+class Inventory extends FlxTypedGroup<SmallObject> {
 
     public var objects:Array<SmallObject> = [];
     public static inline var ROWS:Int = 1;
@@ -19,18 +21,35 @@ class Inventory extends FlxBasic {
         super.update(d);
     }
 
-    public function add(o:SmallObject) {
+    public override function add(o:SmallObject):SmallObject {
         if(objects.indexOf(o) != -1) {
             trace(o.n + " already in inventory!");
-            return;
+            return o;
         }
         if(objects.length >= ROWS*COLS) {
             trace("Inventory full!");
-            return;
+            return o;
         }
-
         var k = objects.push(o);
-        position(o,k-1);
+        positionAll();
+        return super.add(o);
+    }
+
+    public function removeByName(n:String) {
+        var k = objects.find(function(o){return o.n==n;});
+        if(k == null) throw (n +" not found");
+        remove(k);
+    }
+
+    public override function remove(o:SmallObject,s:Bool=false):SmallObject {
+        objects.remove(o);
+        positionAll();
+        return super.remove(o,s);
+    }
+
+    function positionAll() {
+        var count=0;
+        for(o in objects) position(o,count++);
     }
 
     function position(o:SmallObject, k:Int) {

@@ -80,6 +80,12 @@ class Object extends FlxSprite {
         return pixelsOverlapPoint(adjustedCursorPos);
     }
 
+    public function pixelDistance(Other:Object) {
+        return Math.min(
+            Math.ceil(Math.abs(x+width-Other.x)/Game.SCALE_FACTOR),
+            Math.ceil(Math.abs(Other.x+Other.width-x)/Game.SCALE_FACTOR));
+    }
+
 
 
 }
@@ -99,7 +105,6 @@ class Crate extends Object {
     function look(){
         currentRoom.getCharacter("player").say("I think there is a hammer in here");
         var hammer = new Hammer(0,0);
-        FlxG.state.add (hammer);
         R.inv.add (hammer);
         var crate = new EmptyCrate (106,39);
         currentRoom.objects.push(crate);
@@ -116,7 +121,7 @@ class EmptyCrate extends Object {
     }
 }
 
-class Hammer extends Objects.SmallObject{
+class Hammer extends SmallObject{
 
 }
 

@@ -62,6 +62,11 @@ class Room extends Object {
         return cast(k,Character);
     }
 
+    public function addObject(O:Object) {
+        FlxG.state.add(O);
+        objects.push(O);
+    }
+
 }
 
 class Hallway5 extends Room {
