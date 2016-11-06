@@ -88,7 +88,7 @@ class Door extends Object {
     var touched:Bool = false;
     public function new(x,y,?asset:String) {
         super(x,y,asset);
-        customName = "";
+        customName = " ";
     }
 
     public override function update(d):Void {
