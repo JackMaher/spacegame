@@ -104,3 +104,18 @@ class ShipDoor extends Door {
     }
 }
 
+class Manhole extends Door {
+    function new (x,y,nRoom, nX, nY){
+        super(x,y);
+        loadGraphic("assets/images/manhole.png",true, 12, 17);
+        animation.add("closed",[1], 0);
+        animation.add("openedd",[0],0);
+        animation.play("closed");
+
+        updateHitbox();
+
+        newRoom = nRoom;
+        newPlayerX = nX;
+        newPlayerY = nY;
+    }
+}

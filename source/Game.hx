@@ -45,7 +45,7 @@ class Game extends FlxState {
         layers.set(Definitions.Layer.CHAR, charLayer);
         layers.set(Definitions.Layer.FORE, foreLayer);
 
-        switchRoom("Hallway5");
+        switchRoom("Cargo");
 
         add(new FlxSprite(0,880).makeGraphic(FlxG.width,20,0xff333333));
 
