@@ -27,6 +27,8 @@ class Speech extends FlxSpriteGroup {
         if(age > maxAge) {
             kill();
             char.speeches.remove(this);
+            destroy();
+            return;
         }
         super.update(d);
     }
