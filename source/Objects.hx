@@ -12,7 +12,7 @@ class Key extends SmallObject {
 
 class Crewmember extends Object {
     function look(){
-        currentRoom.getCharacter("player").say ("What happen to the crew?");
+        player.say ("What happen to the crew?");
     }
     public function new(x,y){
         super(x,y);
@@ -23,7 +23,7 @@ class Crewmember extends Object {
 
 class Crate extends Object {
     function look(){
-        currentRoom.getCharacter("player").say("I think there is a hammer in here");
+        player.say("I think there is a hammer in here");
         var hammer = new Hammer(0,0);
         R.inv.add (hammer);
         var crate = new EmptyCrate (106,39);

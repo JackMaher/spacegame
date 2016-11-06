@@ -2,6 +2,7 @@ package;
 using Reflect;
 using Lambda;
 using Type;
+using Characters;
 using Speech;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -150,6 +151,7 @@ class Object extends FlxSprite {
     public var n(get,never):String;
     public var customName:String="";
     public var currentRoom(get,never):Room;
+    public var player(get,never):Player;
     var gameX:Int;
     var gameY:Int;
 
@@ -189,6 +191,10 @@ class Object extends FlxSprite {
 
     public function get_currentRoom() {
         return cast(FlxG.state,Game).currentRoom;
+    }
+
+    public function get_player() {
+        return cast(currentRoom.get("player"), Player);
     }
 
     //Work out where this object should be placed.
