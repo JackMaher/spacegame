@@ -28,11 +28,11 @@ class Crate extends Object {
         R.inv.add(new Hammer(0,0));
         currentRoom.addObject(new EmptyCrate(106, 39));
         currentRoom.remObject(this);
-        player.say("Gotit");
+        player.say("I reached in and grabbed a hammer");
 
         }
         else{
-            player.say("I think there is a hammer in here, but I cant reach it");
+            player.say("This cargo crate has been left slightly open");
         }
     }
 
