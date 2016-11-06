@@ -49,10 +49,12 @@ class Game extends FlxState {
 
         if(FlxG.keys.justPressed.F) currentRoom.getCharacter("player").say("Hello");
 
-        var os = currentRoom.objects;
+        var os = currentRoom.objects.copy();
         for(o in R.inv.objects) os.push(o);
         var k = os.find(function(o) {
-            return o.n != "player" && o.isCursorOverPixels();
+            return o.n != "player"
+                && o.overlapsPoint(FlxG.mouse.getPosition())
+                && o.isCursorOverPixels();
         });
         if(k != null) {
             nameText.text = k.n;

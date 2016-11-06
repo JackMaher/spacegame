@@ -149,6 +149,9 @@ class Room extends Object {
 }
 
 class SmallObject extends Object {
+    override public function isCursorOverPixels():Bool {
+        return overlapsPoint(FlxG.mouse.getPosition());
+    }
 }
 
 class Object extends FlxSprite {
