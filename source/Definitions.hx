@@ -141,6 +141,11 @@ class Room extends Object {
         objects.push(O);
     }
 
+    public function remObject(O:Object) {
+        FlxG.state.remove(O);
+        objects.remove(O);
+    }
+
 }
 
 class SmallObject extends Object {

@@ -24,13 +24,10 @@ class Crewmember extends Object {
 class Crate extends Object {
     function look(){
         player.say("I think there is a hammer in here");
-        var hammer = new Hammer(0,0);
-        R.inv.add (hammer);
-        var crate = new EmptyCrate (106,39);
-        currentRoom.objects.push(crate);
-        FlxG.state.add (crate);
-        kill();
-        currentRoom.objects.remove(this);
+
+        R.inv.add(new Hammer(0,0));
+        currentRoom.addObject(new EmptyCrate(106, 39));
+        currentRoom.remObject(this);
     }
 
 }
