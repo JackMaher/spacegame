@@ -10,8 +10,6 @@ class Key extends SmallObject {
 }
 
 
-/* Generic object definitions */
-
 class Crewmember extends Object {
     function look(){
         currentRoom.getCharacter("player").say ("What happen to the crew?");
