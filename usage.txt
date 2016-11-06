@@ -36,9 +36,11 @@ Door
 
 
 Trigger
-    [anything that Object can do, as well as:]
     - function new(x)        = X coordinate only
     - function trigger()     = define this function to say what happens when the player reaches this X value
+
+Block
+    - function new(x)        = X coordinate only
 
 
 Character
