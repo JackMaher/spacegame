@@ -1,7 +1,7 @@
 import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import flixel.FlxG;
-using Characters;
+using Definitions;
 
 class Speech extends FlxSpriteGroup {
     public var text:FlxText;

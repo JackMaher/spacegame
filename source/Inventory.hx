@@ -1,7 +1,9 @@
-import Objects;
+using Objects;
+using Rooms;
+using Definitions;
+using Lambda;
 import flixel.FlxBasic;
 import flixel.group.FlxGroup;
-using Lambda;
 
 class Inventory extends FlxTypedGroup<SmallObject> {
 

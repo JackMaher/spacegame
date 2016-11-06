@@ -1,81 +1,7 @@
 package;
 
 import flixel.FlxG;
-using Objects;
-using Speech;
-using Rooms;
-
-class Character extends SmallObject {
-
-    var walkSpeed:Float = 5;
-    var walk:Null<{pos:Float,then:Void->Void}> = null;
-    public var speeches:Array<Speech>=[];
-    public var dialogs:Int = 0;
-
-    public function new(x:Int,y:Int):Void {
-        super(x,y);
-        say("hi");
-        say("hi2");
-    }
-
-    override public function update(d):Void {
-        if(walk != null) {
-            if(Math.abs(walk.pos-x) < walkSpeed) {
-                x = walk.pos;
-                if(walk.then != null) walk.then();
-                walk = null;
-            }
-            else x += walkSpeed * (walk.pos-x>0?1:-1);
-        }
-
-        updateHitbox();
-        offset.x +=((x-currentRoom.x) % Game.SCALE_FACTOR);
-
-        for(i in 0...speeches.length) {
-            var s = speeches[i];
-            s.text.visible = true;
-            s.x = x+width/2-s.width/2;
-            s.y = y-(0.3+speeches.length-i)*Speech.SIZE;
-        }
-
-        super.update(d);
-
-    }
-
-    public function walkToObject(ne:String, ?dist:Null<Float> = 0, ?then:Void->Void):Void {
-        var ob = currentRoom.get(ne);
-        var nx = 0.0;
-            if(x < ob.x - dist)
-                nx = ob.x - dist;
-            else if(x > ob.x + ob.width + dist)
-                nx = ob.x + ob.width + dist;
-            else
-                nx = x;
-        walkTo(nx, then);
-    }
-
-    public function walkTo(pos:Float, ?then:Void->Void):Void {
-        walk = {pos:pos, then:then};
-    }
-
-    public function say(s:String) {
-        speeches.push(cast FlxG.state.add(new Speech(s,this)));
-    }
-
-    public function option(s:String, ?then:Void->Void):Void {
-        if(dialogs == 0) {
-            for(s in speeches)
-                s.kill();
-            speeches = [];
-        }
-        speeches.push(cast FlxG.state.add(new DialogOption(
-            s,this,speeches.length+1,then)));
-    }
-    public function endOptions() {
-        dialogs = 0;
-    }
-
-}
+using Definitions;
 
 class Player extends Character {
 
@@ -142,6 +68,6 @@ class Sodsbury extends Character {
     }
 
     public function look(){
-        
+
     }
 }
