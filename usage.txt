@@ -1,0 +1,54 @@
+Object
+    - function new(x,y)      = any extra info for when you create it (eg animations). remember super(x,y)!
+    - function look()        = define what happens when you left click the object
+    - function use()         = define what happens when you right click the object
+    - customName=...         = set a custom name to appear when you hover over
+    - layer={BACK,FORE}      = set whether you want it to be behind or infront of the characters
+    - n                      = the name of the object as a string
+    - currentRoom            = a reference to the current room
+    - game                   = a reference to Game
+    - player                 = a reference to Player
+    - roomPos(x,y)           = converted x and y coordinates
+    - pixelDistance(obj)     = the distance in game pixels to another object. Best used with currentRoom.get(name
+
+
+SmallObject
+    [anything that Object can do, but it doesnt do pixel perfect mouse over]
+
+
+Room
+    [anything that Object can do, as well as:]
+    - objects                = array of all objects
+    - function enter()       = define what happens when you enter a room
+    - function leave()       = define what happens when you leave a room
+    - get(name)              = get the object with that name
+    - getCharacter(name)     = get the character with that name
+    - addObject(obj)         = add an object to the room
+    - remObject(obj)         = destroy an object in the room
+
+
+Door
+    [anything that Object can do, as well as:]
+    - newRoom = ...          = name of room to go to when door is used
+    - newPlayerX = ...       = X position of player after door is used
+    - newPlayerY = ...       = Y position pf player after door is used
+    - function new(x,y)      = define the above variables (new___) in this function!
+
+
+Trigger
+    [anything that Object can do, as well as:]
+    - function new(x)        = X coordinate only
+    - function trigger()     = define this function to say what happens when the player reaches this X value
+
+
+Character
+    [anything that Object can do, as well as:]
+    - walkToObject(name)     = walk over to an object. (optionally add a function name to run after)
+    - walkTo(x)              = walk to an X coordinate. (optionally add a function name to run after)
+    - say(string)            = say something. use player.say for player.
+    - option(s, func)        = add a dialog option. add a function to run if that option is chosen.
+    - endOptions()           = no more dialog options. IMPORTANT to call this after adding all options!
+
+
+Game
+    - switchRoom(room,X,Y)   = change to another room.
