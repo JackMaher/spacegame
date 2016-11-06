@@ -134,5 +134,14 @@ class Player extends Character {
 
 
 class Sodsbury extends Character {
+    public function new(x,y):Void {
+        super (x,y);
+        loadGraphic ("assets/images/sodsbury.png", true, 5,13);
+        animation.add("walk", [0,1,2,3], 4, true);
+        animation.play("walk");
+    }
 
+    public function look(){
+        
+    }
 }

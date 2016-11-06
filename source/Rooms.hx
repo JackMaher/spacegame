@@ -64,15 +64,15 @@ class Room extends Object {
 
 }
 
-class Hallway1 extends Room {
+class Hallway5 extends Room {
 
     public function new() {
         super();
     }
 
     override public function create() {
-        objects = [new Sodsbury(0,0),
-                   new Player(20,0),
+        objects = [new Sodsbury(92,21),
+                   new Player(15,15),
                    new SmallObject(40,0)];
     }
     function enter() {
