@@ -23,7 +23,7 @@ class Crewmember extends Object {
 
 class Crate extends Object {
     function look(){
-        
+
         if (pixelDistance(player) < 5){
         R.inv.add(new Hammer(0,0));
         currentRoom.addObject(new EmptyCrate(106, 39));
@@ -48,4 +48,31 @@ class Hammer extends SmallObject{
 
 }
 
+class LeftDoor extends Object {
+    function new(x,y) {
+        super(x,y);
+        customName = "";
+        layer = FORE;
+    };
+}
+
+class CargoDoor extends Door {
+    function new(x,y) {
+        super(x,y,"cargodoor");
+
+        //Graphics stuff
+        loadGraphic("assets/images/cargodoor.png",true, 19,25);
+        animation.add("default", [3], 0);
+        animation.add("open", [2,0,1], 8, false);
+        animation.add("close", [0,2,3], 8, false);
+        animation.play("default");
+
+        updateHitbox();
+
+        // Essential bits of info
+        newRoom = "Hallway5";
+        newPlayerX = 47;
+        newPlayerY = 15;
+    }
+}
 

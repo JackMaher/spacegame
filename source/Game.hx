@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
@@ -20,6 +21,13 @@ class Game extends FlxState {
     public static var SCALE_FACTOR:Int = 8;
     public var currentRoom:Room;
     var nameText:FlxText;
+
+    var roomLayer:FlxGroup=new FlxGroup();
+    var backLayer:FlxGroup=new FlxGroup();
+    var charLayer:FlxGroup=new FlxGroup();
+    var foreLayer:FlxGroup=new FlxGroup();
+    public var layers:Map<Definitions.Layer, FlxGroup> = new Map();
+
     var rooms:Map<String, Room> = new Map();
 
     override public function create():Void {
@@ -28,14 +36,24 @@ class Game extends FlxState {
 
         add(R.inv); // adds the inventory to the screen
 
+        add(roomLayer);
+        add(backLayer);
+        add(charLayer);
+        add(foreLayer);
+        layers.set(Definitions.Layer.ROOM, roomLayer);
+        layers.set(Definitions.Layer.BACK, backLayer);
+        layers.set(Definitions.Layer.CHAR, charLayer);
+        layers.set(Definitions.Layer.FORE, foreLayer);
+
         switchRoom("Cargo");
+
+        add(new FlxSprite(0,880).makeGraphic(FlxG.width,20,0xff333333));
 
         nameText = new FlxText(0,FlxG.height-48,FlxG.width);
         nameText.setFormat("assets/fonts/PIXELADE.TTF");
         nameText.size = 40;
         add(nameText);
 
-        add(new FlxSprite(0,880).makeGraphic(FlxG.width,20,0xffffffff));
 
         super.create();
     }
@@ -53,14 +71,19 @@ class Game extends FlxState {
         for(o in R.inv.objects) os.push(o);
         var k = os.find(function(o) {
             return o.n != "player"
+                && o.n != ""
                 && o.overlapsPoint(FlxG.mouse.getPosition())
                 && o.isCursorOverPixels();
         });
         if(k != null) {
-            nameText.text = k.n;
-            nameText.offset.x = 0;
-            nameText.setBorderStyle(OUTLINE,0xff000000,2);
-            nameText.x = k.x;
+            if(k.n != nameText.text) {
+                nameText.text = k.n;
+                nameText.fieldWidth = 1000;
+                nameText.offset.x = 0;
+                nameText.setBorderStyle(OUTLINE,0xff000000,2);
+                nameText.fieldWidth = nameText.textField.textWidth + 10;
+            }
+            nameText.x = k.x+k.width/2-nameText.width/2;
             nameText.y = k.y - 48;
             if(FlxG.mouse.justPressed)
                 k.v_look();
@@ -71,10 +94,10 @@ class Game extends FlxState {
             nameText.text = "";
     }
 
-    public function switchRoom(R) {
+    public function switchRoom(R:String, ?pX:Int, ?pY:Int) {
         if(currentRoom != null) {
             currentRoom.v_leave();
-            remove(currentRoom);
+            roomLayer.clear();
         }
 
         if(rooms.get(R) == null) {
@@ -85,8 +108,15 @@ class Game extends FlxState {
 
         var room = rooms.get(R);
         currentRoom = room;
+        roomLayer.add(room);
 
-        add(room);
+        var p = room.get("player");
+        if(pX!=null&&pY!=null) {
+            var pos = p.roomPos(pX,pY);
+            p.x = pos.x; p.y=pos.y;
+        }
+
         room.v_enter();
+
     }
 }

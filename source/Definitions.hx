@@ -9,7 +9,7 @@ import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 using StringTools;
 
-class Character extends Object {
+class Character extends SmallObject {
 
     var walkSpeed:Float = 5;
     var walk:Null<{pos:Float,then:Void->Void}> = null;
@@ -18,8 +18,7 @@ class Character extends Object {
 
     public function new(x:Int,y:Int):Void {
         super(x,y);
-        say("hi");
-        say("hi2");
+        layer = CHAR;
     }
 
     override public function update(d):Void {
@@ -33,7 +32,7 @@ class Character extends Object {
         }
 
         updateHitbox();
-        offset.x +=((x-currentRoom.x) % Game.SCALE_FACTOR);
+        //offset.x +=((x-currentRoom.x) % Game.SCALE_FACTOR);
 
         for(i in 0...speeches.length) {
             var s = speeches[i];
@@ -81,12 +80,71 @@ class Character extends Object {
 
 }
 
+class Door extends Object {
+
+    var newRoom:String="";
+    var newPlayerX:Int=0;
+    var newPlayerY:Int=0;
+    var touched:Bool = false;
+    public function new(x,y,?asset:String) {
+        super(x,y,asset);
+        customName = "";
+    }
+
+    public override function update(d):Void {
+        super.update(d);
+        if(animation.finished) {
+        if((pixelDistance(player)==0)) {
+            if(animation.name!="open")animation.play("open");
+            touched = true;
+        }
+        else if(touched)
+            if(animation.name!="close")animation.play("close");
+        }
+
+    }
+
+    function look() {
+        if(pixelDistance(player) > 0) {
+            player.say("I'm too far away from the door.");
+        }
+        else {
+            go();
+        }
+    }
+
+    function go() {
+        if(newRoom=="" || (newPlayerX==0&&newPlayerY==0)) {
+            throw "Not enough information to change room!";
+        }
+        cast(FlxG.state,Game).switchRoom(newRoom,newPlayerX,newPlayerY);
+    }
+
+}
+
+class Trigger extends Object {
+
+    public function new(X:Int) {
+        super(X,0,"trigger");
+        customName="";
+    }
+
+    public override function update(d):Void {
+        super.update(d);
+        if(pixelDistance(player) == 0)
+            if(field("trigger") != null)
+                callMethod(field("trigger"),[]);
+    }
+
+}
+
 class Room extends Object {
 
     public var objects:Array<Object> = [];
 
     public function new() {
         super(0,0);
+        layer = ROOM;
     }
 
     public function create() {}
@@ -102,7 +160,7 @@ class Room extends Object {
 
     public function v_leave() {
         for(o in objects) {
-            FlxG.state.remove(o);
+            cast(FlxG.state,Game).layers.get(o.layer).remove(o);
         }
         if(field("leave") != null)
             callMethod(field("leave"), []);
@@ -111,7 +169,7 @@ class Room extends Object {
 
     public function v_enter() {
         for(o in objects) {
-            FlxG.state.add(o);
+            cast(FlxG.state,Game).layers.get(o.layer).add(o);
         }
         if(field("enter") != null)
             callMethod(field("enter"), []);
@@ -125,7 +183,6 @@ class Room extends Object {
     public function get(O:String):Object {
         var k = objects.find(function(o){return o.n==O;});
         if(k == null) throw ("no object "+O+" in room!");
-        trace(k.n + ", " + k.x);
         return k;
     }
 
@@ -137,13 +194,12 @@ class Room extends Object {
     }
 
     public function addObject(O:Object) {
-        FlxG.state.add(O);
         objects.push(O);
     }
 
     public function remObject(O:Object) {
-        FlxG.state.remove(O);
         objects.remove(O);
+        O.destroy();
     }
 
 }
@@ -157,9 +213,11 @@ class SmallObject extends Object {
 class Object extends FlxSprite {
 
     public var n(get,never):String;
-    public var customName:String="";
+    public var customName:String="~";
     public var currentRoom(get,never):Room;
     public var player(get,never):Player;
+    public var layer(default,set):Layer;
+    public var game(get,never):Game;
     var gameX:Int;
     var gameY:Int;
 
@@ -175,6 +233,7 @@ class Object extends FlxSprite {
         var pos = roomPos(gameX,gameY);
         x = pos.x;
         y = pos.y;
+        layer = BACK;
 
     }
 
@@ -193,20 +252,31 @@ class Object extends FlxSprite {
 
     // Shorthand for name of object.
     public function get_n() {
-        if(customName != "") return customName;
+        if(customName != "~") return customName;
         return getClass().getClassName().toLowerCase();
     }
 
     public function get_currentRoom() {
         return cast(FlxG.state,Game).currentRoom;
     }
+    public function get_game() {
+        return cast(FlxG.state,Game);
+    }
 
     public function get_player() {
         return cast(currentRoom.get("player"), Player);
     }
 
+    public function set_layer(L:Layer) {
+            var g = cast(FlxG.state,Game);
+            for(l in g.layers.iterator()) l.remove(this);
+            g.layers.get(L).add(this);
+
+        return layer = L;
+    }
+
     //Work out where this object should be placed.
-    function roomPos(X:Float,Y:Float) {
+    public function roomPos(X:Float,Y:Float) {
         return {x:currentRoom.x + X*Game.SCALE_FACTOR,
                 y:currentRoom.y + Y*Game.SCALE_FACTOR};
     }
@@ -230,3 +300,9 @@ class Object extends FlxSprite {
 
 }
 
+enum Layer {
+    ROOM;
+    BACK;
+    CHAR;
+    FORE;
+}

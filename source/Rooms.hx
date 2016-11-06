@@ -15,7 +15,8 @@ class Hallway5 extends Room {
     }
 
     override public function create() {
-        objects = [new Sodsbury(92,21),
+        objects = [new LeftDoor(-11,0),
+                  new Sodsbury(92,21),
                    new Player(15,15),
                    new SmallObject(40,0)];
     }
@@ -30,9 +31,10 @@ class Cargo extends Room{
         super();
     }
     override public function create (){
-        objects = [new Player(30,32),
+        objects = [ new Player(30,32),
                     new Crewmember(4,34),
-                    new Crate(106,39),];
+                    new Crate(106,39),
+                    new CargoDoor(17,25),];
     }
 
 }
