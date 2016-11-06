@@ -44,7 +44,7 @@ class Hallway5 extends Room {
                    new SmallObject(40,0)];
     }
     function enter() {
-        getCharacter("sodsbury").walkToObject("player");
+        //getCharacter("sodsbury").walkToObject("player");
     }
 
 }

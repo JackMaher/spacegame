@@ -25,8 +25,9 @@ class Character extends SmallObject {
         if(walk != null) {
             if(Math.abs(walk.pos-x) < walkSpeed) {
                 x = walk.pos;
-                if(walk.then != null) walk.then();
+                var pwalk = walk;
                 walk = null;
+                if(pwalk.then != null) pwalk.then();
             }
             else x += walkSpeed * (walk.pos-x>0?1:-1);
         }
@@ -58,7 +59,7 @@ class Character extends SmallObject {
     }
 
     public function walkTo(pos:Float, ?then:Void->Void):Void {
-        walk = {pos:pos, then:then};
+        walk = {pos:roomPos(pos,0).x, then:then};
     }
 
     public function say(s:String) {

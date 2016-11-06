@@ -65,9 +65,17 @@ class Sodsbury extends Character {
         loadGraphic ("assets/images/sodsbury.png", true, 5,13);
         animation.add("walk", [0,1,2,3], 4, true);
         animation.play("walk");
+        walk1();
+    }
+
+    function walk1() {
+        walkTo(50,walk2);
+    }
+    function walk2() {
+        walkTo(90,walk1);
     }
 
     public function look(){
-
+        walk = null;
     }
 }
