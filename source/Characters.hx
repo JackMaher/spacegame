@@ -66,6 +66,7 @@ class Sodsbury extends Character {
         animation.add("walk", [0,1,2,3], 4, true);
         animation.play("walk");
         walk1();
+        walkSpeed = 2;
     }
 
     public override function update(d){

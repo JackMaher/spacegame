@@ -45,6 +45,7 @@ Block
 
 Character
     [anything that Object can do, as well as:]
+    - walkSpeed = ...        = how fast to walk
     - walkToObject(name)     = walk over to an object. (optionally add a function name to run after)
     - walkTo(x)              = walk to an X coordinate. (optionally add a function name to run after)
     - say(string)            = say something. use player.say for player.
