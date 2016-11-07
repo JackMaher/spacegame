@@ -2,6 +2,7 @@ package;
 using Reflect;
 using Lambda;
 using Type;
+using Std;
 using Characters;
 using Speech;
 import flixel.FlxG;
@@ -67,16 +68,19 @@ class Character extends Object {
     }
 
     public function option(s:String, ?col:Int = 0xffffffff, ?then:Void->Void):Void {
-        if(dialogs == 0) {
-            for(s in speeches)
-                s.kill();
-            speeches = [];
-        }
+        if(dialogs == 0) clearSpeeches();
+        dialogs++;
         speeches.push(cast FlxG.state.add(new DialogOption(
             s,this,speeches.length+1,then)));
     }
     public function endOptions() {
         dialogs = 0;
+    }
+
+    public function clearSpeeches() {
+            for(s in speeches)
+                s.kill();
+            speeches = [];
     }
 
 }
@@ -177,6 +181,7 @@ class Room extends Object {
     public function v_leave() {
         for(o in objects) {
             cast(FlxG.state,Game).layers.get(o.layer).remove(o);
+            if(o.is(Character)) cast(o,Character).clearSpeeches();
         }
         if(field("leave") != null)
             callMethod(field("leave"), []);
