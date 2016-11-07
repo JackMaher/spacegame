@@ -9,7 +9,7 @@ import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 using StringTools;
 
-class Character extends SmallObject {
+class Character extends Object {
 
     var walkSpeed:Float = 5;
     var walk:Null<{pos:Float,then:Void->Void}> = null;
@@ -220,9 +220,24 @@ class Room extends Object {
 }
 
 class SmallObject extends Object {
+    public var inInventory:Bool = false;
+
     override public function isCursorOverPixels():Bool {
         return overlapsPoint(FlxG.mouse.getPosition());
     }
+
+    public function v_useOn(o:Object) {
+        if(field("useOn")!= null) {
+            callMethod(field("useOn"), [o]);
+        }
+    }
+
+    function use() {
+        if(inInventory) {
+            game.objUsing = this;
+        }
+    }
+
 }
 
 class Object extends FlxSprite {

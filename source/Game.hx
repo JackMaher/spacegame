@@ -21,6 +21,7 @@ class Game extends FlxState {
     public static var SCALE_FACTOR:Int = 8;
     public var currentRoom:Room;
     var nameText:FlxText;
+    public var objUsing:SmallObject;
 
     var roomLayer:FlxGroup=new FlxGroup();
     var backLayer:FlxGroup=new FlxGroup();
@@ -34,7 +35,6 @@ class Game extends FlxState {
         ROOM_HEIGHT = 800;
         ROOM_TOP = 50;
 
-        add(R.inv); // adds the inventory to the screen
 
         add(roomLayer);
         add(backLayer);
@@ -54,6 +54,7 @@ class Game extends FlxState {
         nameText.size = 40;
         add(nameText);
 
+        add(R.inv); // adds the inventory to the screen
 
         super.create();
     }
@@ -68,7 +69,7 @@ class Game extends FlxState {
         if(FlxG.keys.justPressed.F) currentRoom.getCharacter("player").say("Hello");
 
         var os = currentRoom.objects.copy();
-        for(o in R.inv.objects) os.push(o);
+        for(o in R.inv.objects) if(o != objUsing) os.push(o);
         var k = os.find(function(o) {
             return o.n != "player"
                 && o.n != ""
@@ -85,13 +86,34 @@ class Game extends FlxState {
             }
             nameText.x = k.x+k.width/2-nameText.width/2;
             nameText.y = k.y - 48;
-            if(FlxG.mouse.justPressed)
-                k.v_look();
-            if(FlxG.mouse.justPressedRight)
-                k.v_use();
+
         }
         else
             nameText.text = "";
+
+        if(objUsing == null) {
+            if(FlxG.mouse.justPressed)
+                if(k != null) k.v_look();
+            if(FlxG.mouse.justPressedRight)
+                if(k != null) k.v_use();
+        }
+        else {
+            var p = FlxG.mouse.getPosition();
+            objUsing.x = p.x-objUsing.width/2;
+            objUsing.y = p.y-objUsing.width/2;
+            FlxG.mouse.visible = false;
+            if(FlxG.mouse.justPressed){
+                if(k != null) {
+                    objUsing.v_useOn(k);
+                    objUsing = null;
+                    FlxG.mouse.visible = true;
+                }
+            }
+            if(FlxG.mouse.justPressedRight) {
+                objUsing = null;
+                FlxG.mouse.visible = true;
+            }
+        }
     }
 
     public function switchRoom(R:String, ?pX:Int, ?pY:Int) {

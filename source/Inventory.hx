@@ -4,6 +4,7 @@ using Definitions;
 using Lambda;
 import flixel.FlxBasic;
 import flixel.group.FlxGroup;
+import flixel.FlxG;
 
 class Inventory extends FlxTypedGroup<SmallObject> {
 
@@ -21,6 +22,7 @@ class Inventory extends FlxTypedGroup<SmallObject> {
 
     override public function update(d):Void {
         super.update(d);
+        positionAll();
     }
 
     public override function add(o:SmallObject):SmallObject {
@@ -32,8 +34,8 @@ class Inventory extends FlxTypedGroup<SmallObject> {
             trace("Inventory full!");
             return o;
         }
+        o.inInventory = true;
         var k = objects.push(o);
-        positionAll();
         return super.add(o);
     }
 
@@ -45,13 +47,15 @@ class Inventory extends FlxTypedGroup<SmallObject> {
 
     public override function remove(o:SmallObject,s:Bool=false):SmallObject {
         objects.remove(o);
+        o.inInventory = false;
         positionAll();
         return super.remove(o,s);
     }
 
     function positionAll() {
         var count=0;
-        for(o in objects) position(o,count++);
+        for(o in objects) if(cast(FlxG.state,Game).objUsing != o)
+            position(o,count++);
     }
 
     function position(o:SmallObject, k:Int) {

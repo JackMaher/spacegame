@@ -1,6 +1,7 @@
 package;
 using Definitions;
 using Rooms;
+using Type;
 import flixel.FlxSprite;
 import flixel.FlxBasic;
 import flixel.FlxG;
@@ -16,7 +17,6 @@ class Crewmember extends Object {
     }
     public function new(x,y){
         super(x,y);
-        customName = "Crewmemebr";
     }
 
 }
@@ -47,6 +47,12 @@ class EmptyCrate extends Object {
 class Hammer extends SmallObject{
     function look(){
         player.say("This hammer could pack quite a punch");
+    }
+
+    function useOn(other:Object) {
+        if(other.n == "crewmember") {
+            player.say("That would be mean.");
+        }
     }
 
 }
