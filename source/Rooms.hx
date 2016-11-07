@@ -57,7 +57,7 @@ class Hallway4 extends Room{
         objects = [new Player(0,0),
         new RoomTrigger(-10,"Hallway3",100,15),
         new RoomTrigger(120,"Hallway5",0,15),
-        new Manhole(66,16,"Powerroom",1,1),
+        new Manhole(66,16),
         new RightDoor (106,0),
         new LeftDoor(-11,0),
         ];
@@ -108,3 +108,18 @@ class Captinsroom extends Room{
                     new ShipDoor(103,22, "Hallway1",29,15)];
     }
 }
+
+class Powerroom extends Room{
+    public function new(){
+        super();
+    }
+    override public function create (){
+        objects = [new Player(0,0),
+                    new Powerpc(140,67),
+                    new Ladder(168,2),
+        ];
+    }
+
+}
+
+

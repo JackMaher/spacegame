@@ -105,7 +105,7 @@ class Door extends Object {
 
     }
 
-    function look() {
+    function use() {
         if(pixelDistance(player) > 0) {
             player.say("I'm too far away from the door.");
         }

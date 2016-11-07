@@ -23,7 +23,10 @@ class Crewmember extends Object {
 
 class Crate extends Object {
     function look(){
+        player.say("This cargo crate has been left slightly open");
 
+    }
+    function use(){
         if (pixelDistance(player) < 5){
         R.inv.add(new Hammer(0,0));
         currentRoom.addObject(new EmptyCrate(106, 39));
@@ -32,7 +35,7 @@ class Crate extends Object {
 
         }
         else{
-            player.say("This cargo crate has been left slightly open");
+            player.say("I can't reach that from here");
         }
     }
 
@@ -52,6 +55,9 @@ class Hammer extends SmallObject{
     function useOn(other:Object) {
         if(other.n == "crewmember") {
             player.say("That would be mean.");
+        }
+        if(other.n =="manhole"){
+            cast(other,Manhole).Open();
         }
     }
 
@@ -110,18 +116,65 @@ class ShipDoor extends Door {
     }
 }
 
-class Manhole extends Door {
-    function new (x,y,nRoom, nX, nY){
+class Manhole extends Object {
+    var Opened:Bool = false;
+    public function new (x,y){
         super(x,y);
         loadGraphic("assets/images/manhole.png",true, 12, 17);
         animation.add("closed",[1], 0);
-        animation.add("openedd",[0],0);
+        animation.add("opened",[0],0);
         animation.play("closed");
 
         updateHitbox();
-
-        newRoom = nRoom;
-        newPlayerX = nX;
-        newPlayerY = nY;
     }
+
+    public function Open(){
+        animation.play("opened");
+        if(Opened != true){
+            player.say("I pryed the cover opened");
+        }
+        Opened = true;
+    }
+    public function use(){
+        if (Opened == true){ 
+            game.switchRoom("Powerroom", 167,66);
+        }
+        else{
+            player.say("This manhole has seen better days");
+        }
+    }
+
+    function look(){
+        if (Opened == false){
+        player.say("The lid doesnt want to budge");
+        }
+        else {
+            player.say("Its a long way down");
+        }
+    }
+
+}
+
+class Powerpc extends Character {
+    function new(x,y) {
+        super(x,y);
+        customName = "Computer";
+        layer = FORE;
+    };
+    function look(){
+        player.say("The screen seems to be flashing some error message");
+    }
+    function use(){
+        say("Error Bonicchip corrupted, replace with new chip");
+    }
+}
+
+class Ladder extends Object{
+    function new(x,y){
+        super(x,y);
+    }
+    public function use(){
+        game.switchRoom("Hallway4",63,15);
+    }
+
 }

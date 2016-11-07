@@ -93,9 +93,9 @@ class Game extends FlxState {
 
         if(objUsing == null) {
             if(FlxG.mouse.justPressed)
-                if(k != null) k.v_look();
-            if(FlxG.mouse.justPressedRight)
                 if(k != null) k.v_use();
+            if(FlxG.mouse.justPressedRight)
+                if(k != null) k.v_look();
         }
         else {
             var p = FlxG.mouse.getPosition();
