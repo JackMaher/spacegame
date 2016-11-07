@@ -8,6 +8,7 @@ using Speech;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
+import flixel.util.FlxTimer;
 using StringTools;
 
 class Character extends Object {
@@ -329,6 +330,10 @@ class Object extends FlxSprite {
         if(x+width>Other.x && Other.x+Other.width > x) return 0;
         else if(x+width<=Other.x) return cast (Other.x-x-width)/Game.SCALE_FACTOR;
         else                      return cast (x-Other.x-Other.width)/Game.SCALE_FACTOR;
+    }
+
+    public function wait(Seconds:Float, then:Void->Void) {
+        new FlxTimer().start(Seconds, function(t){then();});
     }
 
 
