@@ -105,7 +105,8 @@ class Captinsroom extends Room{
     }
     override public function create (){
         objects = [new Player(0,0),
-                    new ShipDoor(103,22, "Hallway1",29,15)];
+                    new ShipDoor(103,22, "Hallway1",29,15),
+                    new Terminal(18,25)];
     }
 }
 

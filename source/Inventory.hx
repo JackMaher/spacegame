@@ -11,7 +11,7 @@ class Inventory extends FlxTypedGroup<SmallObject> {
     public var objects:Array<SmallObject> = [];
     public static inline var ROWS:Int = 1;
     public static inline var COLS:Int = 5;
-    public static inline var SLOT_SIZE:Int = 32;
+    public static inline var SLOT_SIZE:Int = 60;
 
     static inline var X:Int = 1500;
     static inline var Y:Int = 920;
@@ -50,6 +50,7 @@ class Inventory extends FlxTypedGroup<SmallObject> {
         o.inInventory = false;
         positionAll();
         return super.remove(o,s);
+        FlxG.state.remove(o);
     }
 
     function positionAll() {

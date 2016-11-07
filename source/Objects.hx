@@ -2,9 +2,11 @@ package;
 using Definitions;
 using Rooms;
 using Type;
+using Characters;
 import flixel.FlxSprite;
 import flixel.FlxBasic;
 import flixel.FlxG;
+import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
 
 class Key extends SmallObject {
@@ -59,8 +61,28 @@ class Hammer extends SmallObject{
         if(other.n =="manhole"){
             cast(other,Manhole).Open();
         }
+
+        if (other.n == "sodsbury"){
+        cast(other,Sodsbury).kill();
+
+        }
+
+
     }
 
+}
+
+class Bionicchip extends SmallObject{
+    function look(){
+        player.say("Not quite sure what todo with this");
+    }
+    function useOn(other:Object){
+        if(other.n=="Computer"){
+            cast(other,Powerpc).pcOn = true;
+            R.inv.remove (this);
+            cast(other,Powerpc).say("Bionic Chip installed, restoring power",FlxColor.GREEN);
+        }
+    }
 }
 
 class LeftDoor extends Object {
@@ -156,17 +178,29 @@ class Manhole extends Object {
 }
 
 class Powerpc extends Character {
+    public var pcOn:Bool = false;
     function new(x,y) {
         super(x,y);
         customName = "Computer";
         layer = FORE;
-    };
-    function look(){
-        player.say("The screen seems to be flashing some error message");
     }
+
     function use(){
-        say("Error Bonicchip corrupted, replace with new chip");
+        if(pcOn == false){
+            say("Error Bionic Chip corrupted, replace with new chip",FlxColor.MAGENTA);
+        }
+        else {
+             say("Power Restored", FlxColor.GREEN);
+        }
     }
+    function look(){
+
+    if(pcOn == false){
+            player.say("The screen seems to be flashing some error message");
+        }
+    }
+
+
 }
 
 class Ladder extends Object{
@@ -177,4 +211,16 @@ class Ladder extends Object{
         game.switchRoom("Hallway4",63,15);
     }
 
+}
+
+class Terminal extends Character{
+    function new(x,y){
+        super(x,y);
+    }
+    function look(){
+        player.say("This must be the Captins terminal.");
+    }
+    function use(){
+        player.say("This terminal has no power.");
+    }
 }
