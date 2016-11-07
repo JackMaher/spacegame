@@ -10,6 +10,7 @@ Object
     - player                 = a reference to Player
     - roomPos(x,y)           = converted x and y coordinates
     - pixelDistance(obj)     = the distance in game pixels to another object. Best used with currentRoom.get(name
+    - wait(seconds, then)    = wait for that number of seconds, then run the function
 
 
 SmallObject
