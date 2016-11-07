@@ -49,7 +49,7 @@ Character
     - walkSpeed = ...        = how fast to walk
     - walkToObject(name)     = walk over to an object. (optionally add a function name to run after)
     - walkTo(x)              = walk to an X coordinate. (optionally add a function name to run after)
-    - say(string)            = say something. use player.say for player.
+    - say(string,color?,time?) = say something. use player.say for player.
     - option(s, func)        = add a dialog option. add a function to run if that option is chosen.
     - endOptions()           = no more dialog options. IMPORTANT to call this after adding all options!
 

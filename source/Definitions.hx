@@ -64,8 +64,8 @@ class Character extends Object {
         walk = {pos:roomPos(pos,0).x, then:then};
     }
 
-    public function say(s:String,?col:Int=0xffffffff) {
-        speeches.push(cast FlxG.state.add(new Speech(s,this, col)));
+    public function say(s:String,?col:Int=0xffffffff,?maxAge:Float=3) {
+        speeches.push(cast FlxG.state.add(new Speech(s,this, col, maxAge)));
     }
 
     public function option(s:String, ?col:Int = 0xffffffff, ?then:Void->Void):Void {

@@ -9,7 +9,7 @@ class Speech extends FlxSpriteGroup {
     var maxAge:Float = 3;
     var char:Character;
     public static var SIZE:Int = 48;
-    public function new(s:String,char:Character,?col:Int=0xffffffff):Void {
+    public function new(s:String,char:Character,?col:Int=0xffffffff,?MaxAge:Float=3):Void {
         super();
         text = new FlxText(0,0,1000,s);
         text.setFormat("assets/fonts/PIXELADE.TTF");
@@ -22,6 +22,7 @@ class Speech extends FlxSpriteGroup {
         text.fieldWidth = text.textField.textWidth + 10;
         text.updateHitbox();
         text.visible = false;
+        maxAge = MaxAge;
     }
     override public function update(d) {
         age+=d;
