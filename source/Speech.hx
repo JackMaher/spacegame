@@ -9,13 +9,14 @@ class Speech extends FlxSpriteGroup {
     var maxAge:Float = 3;
     var char:Character;
     public static var SIZE:Int = 48;
-    public function new(s:String,char:Character):Void {
+    public function new(s:String,char:Character,?col:Int=0xffffffff):Void {
         super();
         text = new FlxText(0,0,1000,s);
         text.setFormat("assets/fonts/PIXELADE.TTF");
         text.size = 40;
         text.alignment=CENTER;
         add(text);
+        text.color = col;
         text.setBorderStyle(OUTLINE,0xff000000,2);
         this.char = char;
         text.fieldWidth = text.textField.textWidth + 10;
