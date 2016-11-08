@@ -95,7 +95,7 @@ class Door extends Object. {
     var locked:Bool = false;
     var lockedText:String = "It's locked.";
     public function new(x,y,?asset:String) {
-        super(x,y,asset);
+        super(x,y);
         customName = " ";
     }
 

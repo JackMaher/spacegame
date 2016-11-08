@@ -77,7 +77,8 @@ class Hallway5 extends Room {
                    new SmallObject(40,0),
                    new RoomTrigger(-10,"Hallway4",100,15),
                    new RightDoor (106,0),
-                   new Block(116),];
+                   new Block(116),
+                   new Cockdoor(43,8, "Hallway2",1,1)];
     }
     function enter() {
         //getCharacter("sodsbury").walkToObject("player");
