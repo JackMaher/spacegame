@@ -92,6 +92,8 @@ class Door extends Object {
     var newPlayerX:Int=0;
     var newPlayerY:Int=0;
     var touched:Bool = false;
+    var locked:Bool = false;
+    var lockedText:String = "It's locked.";
     public function new(x,y,?asset:String) {
         super(x,y,asset);
         customName = " ";
@@ -100,7 +102,7 @@ class Door extends Object {
     public override function update(d):Void {
         super.update(d);
         if(animation.finished) {
-        if((pixelDistance(player)==0)) {
+        if((pixelDistance(player)==0) && !locked) {
             if(animation.name!="open")animation.play("open");
             touched = true;
         }
@@ -115,7 +117,8 @@ class Door extends Object {
             player.say("I'm too far away from the door.");
         }
         else {
-            go();
+            if(locked) player.say(lockedText);
+            else go();
         }
     }
 
