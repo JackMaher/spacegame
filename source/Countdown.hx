@@ -8,6 +8,7 @@ class Countdown extends FlxText {
     public var minsLeft(get,never):Int;
     public var secsLeft(get,never):Int;
     public static var done:Bool = false;
+    public static var stopped:Bool = false;
 
     public function new() {
         super(0,920,420,"");
@@ -20,7 +21,7 @@ class Countdown extends FlxText {
 
     override public function update(d) {
         super.update(d);
-        if(!done) {
+        if(!done && !stopped) {
             time -= d;
             if(time < 0) done = true;
 
@@ -37,7 +38,7 @@ class Countdown extends FlxText {
     }
 
     public function stop() {
-        done = true;
+        stopped = true;
         color = 0xff777777;
     }
 
