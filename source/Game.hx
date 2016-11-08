@@ -28,6 +28,9 @@ class Game extends FlxState {
     var backLayer:FlxGroup=new FlxGroup();
     var charLayer:FlxGroup=new FlxGroup();
     var foreLayer:FlxGroup=new FlxGroup();
+
+    var countdown:Countdown;
+
     public var layers:Map<Definitions.Layer, FlxGroup> = new Map();
 
     var rooms:Map<String, Room> = new Map();
@@ -54,6 +57,8 @@ class Game extends FlxState {
         nameText.setFormat("assets/fonts/PIXELADE.TTF");
         nameText.size = 40;
         add(nameText);
+
+        add(countdown = new Countdown());
 
         add(R.inv); // adds the inventory to the screen
 
