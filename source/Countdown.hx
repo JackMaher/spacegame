@@ -10,9 +10,10 @@ class Countdown extends FlxText {
     public static var done:Bool = false;
 
     public function new() {
-        super(20,920,FlxG.width,"");
+        super(0,920,420,"");
         setFormat("assets/fonts/PIXELADE.TTF");
         size = 64;
+        alignment = RIGHT;
         color = 0xff000000;
         setBorderStyle(OUTLINE,0xffffffff,4);
     }
