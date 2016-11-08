@@ -349,7 +349,6 @@ class Object extends FlxSprite {
             t.destroy();
         }
         timers = [];
-        walk = null;
     }
 
 }
