@@ -72,7 +72,7 @@ class Hallway5 extends Room {
 
     override public function create() {
         objects = [new LeftDoor(-11,0),
-                  new Sodsbury(92,21),
+                  new Sodsbury(92,20),
                    new Player(15,15),
                    new SmallObject(40,0),
                    new RoomTrigger(-10,"Hallway4",100,15),

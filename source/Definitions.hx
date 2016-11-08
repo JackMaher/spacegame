@@ -14,7 +14,7 @@ using StringTools;
 class Character extends Object {
 
     var walkSpeed:Float = 5;
-    var walk:Null<{pos:Float,then:Void->Void}> = null;
+    public var walk:Null<{pos:Float,then:Void->Void}> = null;
     public var speeches:Array<Speech>=[];
     public var dialogs:Int = 0;
 
@@ -336,7 +336,9 @@ class Object extends FlxSprite {
         new FlxTimer().start(Seconds, function(t){then();});
     }
 
-
+    public function tileX(){
+        return Math.floor((x - currentRoom.x)/Game.SCALE_FACTOR);
+    }
 
 }
 

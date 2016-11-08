@@ -4,6 +4,7 @@ using Rooms;
 using Type;
 using Characters;
 import flixel.FlxSprite;
+import flixel.FlxObject;
 import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.util.FlxColor;
@@ -55,6 +56,22 @@ class Hammer extends SmallObject{
     }
 
     function useOn(other:Object) {
+
+            var _stopSwing = function(){
+                player._swing = false;
+            }
+
+                var move1 = function() {
+                cast(other,Sodsbury).kill();
+                player._canControl = true;
+            }
+
+            var _startSwing = function (){
+                player._swing = true;
+                player.facing = FlxObject.RIGHT;
+                wait(0.5, move1);
+                wait(1,_stopSwing);
+            }
         if(other.n == "crewmember") {
             player.say("That would be mean.");
         }
@@ -63,14 +80,18 @@ class Hammer extends SmallObject{
         }
 
         if (other.n == "sodsbury"){
-        cast(other,Sodsbury).kill();
+            player.walkTo(other.tileX()-4, _startSwing);
+            cast(other,Sodsbury).flipX = false;
+            player._canControl = false;
+            cast(other,Sodsbury).walk = null;
 
+            
+            
         }
-
-
     }
-
 }
+
+
 
 class Bionicchip extends SmallObject{
     function look(){

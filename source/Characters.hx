@@ -5,6 +5,8 @@ using Objects;
 using Definitions;
 
 class Player extends Character {
+    public var _swing = false;
+    public var _canControl = true;
 
     public function new(x,y):Void {
 
@@ -13,6 +15,7 @@ class Player extends Character {
         loadGraphic("assets/images/player.png", true, 14,18);
         animation.add("lr", [0,1,2], 6, false);
         animation.add("idle", [3,4], 3,false);
+        animation.add("swing",[5,6,7],3,false);
     }
 
     private function movement():Void {
@@ -24,7 +27,7 @@ class Player extends Character {
             if(x > walk.pos) _left = true;
             if(x < walk.pos) _right = true;
         }
-        else {
+        else if (_canControl) {
             if(flixel.FlxG.keys.anyPressed(["LEFT","A"])) _left = true;
             if(flixel.FlxG.keys.anyPressed(["RIGHT","D"])) _right = true;
         }
@@ -43,8 +46,10 @@ class Player extends Character {
             if(walk==null) x += 5;
             flipX = false;
         }
-
-        if (moving){
+        if (_swing){
+            animation.play("swing");
+        }
+        else if (moving){
             /*_sndStep.play();*/
             animation.play("lr");
         }
@@ -65,9 +70,10 @@ class Sodsbury extends Character {
 
     public function new(x,y):Void {
         super (x,y);
-        loadGraphic ("assets/images/sodsbury.png", true, 5,13);
+        loadGraphic ("assets/images/sodsbury.png", true, 21,16);
         animation.add("walk", [0,1,2,3], 4, true);
-        animation.add("dead",[4],0,true);
+        animation.add("deadani",[4,5,6,7,8,9,10],7,false);
+        animation.add("dead",[10],0,true);
         animation.play("walk");
         walk1();
         walkSpeed = 2;
@@ -210,8 +216,12 @@ class Sodsbury extends Character {
         }  
 
         override function kill(){
-            animation.play("dead");
+            animation.play("deadani");
             alive = false;
+            wait (1,kill_);
+        }
+        function kill_(){
+            animation.play("dead");
         }
         
     }
