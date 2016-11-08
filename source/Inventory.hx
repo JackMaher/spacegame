@@ -49,8 +49,8 @@ class Inventory extends FlxTypedGroup<SmallObject> {
         objects.remove(o);
         o.inInventory = false;
         positionAll();
+        o.kill();
         return super.remove(o,s);
-        FlxG.state.remove(o);
     }
 
     function positionAll() {
