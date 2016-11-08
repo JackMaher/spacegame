@@ -223,10 +223,11 @@ class Sodsbury extends Character {
         override function kill(){
             animation.play("deadani");
             alive = false;
-            wait (1,kill_);
+            wait (1,die);
         }
-        function kill_(){
+        override function die(){
             animation.play("dead");
+            super.die();
         }
 
     }

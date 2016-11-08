@@ -17,7 +17,6 @@ class Character extends Object {
     public var walk:Null<{pos:Float,then:Void->Void}> = null;
     public var speeches:Array<Speech>=[];
     public var dialogs:Int = 0;
-    var timers:Array<FlxTimer> = [];
 
     public function new(x:Int,y:Int):Void {
         super(x,y);
@@ -258,6 +257,7 @@ class Object extends FlxSprite {
     public var player(get,never):Player;
     public var layer(default,set):Layer;
     public var game(get,never):Game;
+    var timers:Array<FlxTimer> = [];
     var gameX:Int;
     var gameY:Int;
 
@@ -337,11 +337,19 @@ class Object extends FlxSprite {
     }
 
     public function wait(Seconds:Float, then:Void->Void) {
-        new FlxTimer().start(Seconds, function(t){then();});
+        timers.push(new FlxTimer().start(Seconds, function(t){then();}));
     }
 
     public function tileX(){
         return Math.floor((x - currentRoom.x)/Game.SCALE_FACTOR);
+    }
+
+    public function die() {
+        for(t in timers) {
+            t.destroy();
+        }
+        timers = [];
+        walk = null;
     }
 
 }
