@@ -78,7 +78,7 @@ class Hallway5 extends Room {
                    new RoomTrigger(-10,"Hallway4",100,15),
                    new RightDoor (106,0),
                    new Block(116),
-                   new Cockdoor(43,8, "Hallway2",1,1)];
+                   new Cockdoor(43,8, "Cockpit",1,1)];
     }
     function enter() {
         //getCharacter("sodsbury").walkToObject("player");
@@ -122,6 +122,15 @@ class Powerroom extends Room{
         ];
     }
 
+}
+
+class Cockpit extends Room{
+    public function new(){
+        super();
+    }
+    override public function create (){
+        objects = [new Player(1,1)];
+    }
 }
 
 

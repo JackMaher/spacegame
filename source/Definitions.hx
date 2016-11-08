@@ -87,7 +87,7 @@ class Character extends Object {
 
 }
 
-class Door extends Object. {
+class Door extends Object {
 
     var newRoom:String="";
     var newPlayerX:Int=0;
@@ -118,7 +118,7 @@ class Door extends Object. {
             player.say("I'm too far away from the door.");
         }
         else {
-            if(locked) say(lockedText);
+            if(locked) player.say(lockedText);
             else go();
         }
     }
