@@ -24,8 +24,8 @@ class Countdown extends FlxText {
         super.update(d);
         if(!done && !stopped) {
             time -= d;
+            var secs = secsLeft.lpad("0",2);
             if(time < 0) done = true;
-            var secs = secsLeft.lpad(2,"0");
             else text = '$minsLeft:$secs';
         }
     }
