@@ -36,4 +36,9 @@ class Countdown extends FlxText {
         return Std.int(Math.ceil(time) % 60);
     }
 
+    public function stop() {
+        done = true;
+        color = 0xff777777;
+    }
+
 }

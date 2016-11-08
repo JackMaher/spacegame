@@ -29,7 +29,7 @@ class Game extends FlxState {
     var charLayer:FlxGroup=new FlxGroup();
     var foreLayer:FlxGroup=new FlxGroup();
 
-    var countdown:Countdown;
+    public static var countdown:Countdown;
 
     public var layers:Map<Definitions.Layer, FlxGroup> = new Map();
 
