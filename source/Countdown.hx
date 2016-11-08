@@ -2,6 +2,7 @@ package;
 
 import flixel.text.FlxText;
 import flixel.FlxG;
+using StringTools;
 
 class Countdown extends FlxText {
     var time:Float = 300;
@@ -24,8 +25,8 @@ class Countdown extends FlxText {
         if(!done && !stopped) {
             time -= d;
             if(time < 0) done = true;
-
-            else text = '$minsLeft:$secsLeft';
+            var secs = secsLeft.lpad(2,"0");
+            else text = '$minsLeft:$secs';
         }
     }
 
