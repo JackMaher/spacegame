@@ -17,6 +17,7 @@ class Character extends Object {
     public var walk:Null<{pos:Float,then:Void->Void}> = null;
     public var speeches:Array<Speech>=[];
     public var dialogs:Int = 0;
+    var timers:Array<FlxTimer> = [];
 
     public function new(x:Int,y:Int):Void {
         super(x,y);
@@ -86,7 +87,7 @@ class Character extends Object {
 
 }
 
-class Door extends Character {
+class Door extends Object. {
 
     var newRoom:String="";
     var newPlayerX:Int=0;
