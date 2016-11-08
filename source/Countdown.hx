@@ -7,9 +7,10 @@ class Countdown extends FlxText {
     var time:Float = 300;
     public var minsLeft(get,never):Int;
     public var secsLeft(get,never):Int;
+    public static var done:Bool = false;
 
     public function new() {
-        super(0,920,FlxG.width,"");
+        super(20,920,FlxG.width,"");
         setFormat("assets/fonts/PIXELADE.TTF");
         size = 64;
         color = 0xff000000;
@@ -18,9 +19,12 @@ class Countdown extends FlxText {
 
     override public function update(d) {
         super.update(d);
-        time -= d;
+        if(!done) {
+            time -= d;
+            if(time < 0) done = true;
 
-        text = '$minsLeft:$secsLeft';
+            else text = '$minsLeft:$secsLeft';
+        }
     }
 
     public function get_minsLeft() {
