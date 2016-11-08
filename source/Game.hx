@@ -20,6 +20,7 @@ class Game extends FlxState {
     public static var ROOM_TOP:Int;
     public static var SCALE_FACTOR:Int = 8;
     public var currentRoom:Room;
+    public var canInteract:Bool = true;
     var nameText:FlxText;
     public var objUsing:SmallObject;
 
@@ -62,58 +63,59 @@ class Game extends FlxState {
     override public function update(elapsed:Float):Void {
         super.update(elapsed);
 
-        if(FlxG.keys.justPressed.ONE) switchRoom("Room");
-        if(FlxG.keys.justPressed.TWO) switchRoom("Hallway5");
         if(FlxG.keys.justPressed.Q) Sys.exit(0);
 
         if(FlxG.keys.justPressed.F) currentRoom.getCharacter("player").say("Hello");
 
-        var os = currentRoom.objects.copy();
-        for(o in R.inv.objects) if(o != objUsing) os.push(o);
-        var k = os.find(function(o) {
-            return o.n != "player"
-                && o.n != ""
-                && o.overlapsPoint(FlxG.mouse.getPosition())
-                && o.isCursorOverPixels();
-        });
-        if(k != null) {
-            if(k.n != nameText.text) {
-                nameText.text = k.n;
-                nameText.fieldWidth = 1000;
-                nameText.offset.x = 0;
-                nameText.setBorderStyle(OUTLINE,0xff000000,2);
-                nameText.fieldWidth = nameText.textField.textWidth + 10;
+        if(canInteract) {
+            var os = currentRoom.objects.copy();
+            for(o in R.inv.objects) if(o != objUsing) os.push(o);
+            var k = os.find(function(o) {
+                return o.n != "player"
+                    && o.n != ""
+                    && o.overlapsPoint(FlxG.mouse.getPosition())
+                    && o.isCursorOverPixels();
+            });
+            if(k != null) {
+                if(k.n != nameText.text) {
+                    nameText.text = k.n;
+                    nameText.fieldWidth = 1000;
+                    nameText.offset.x = 0;
+                    nameText.setBorderStyle(OUTLINE,0xff000000,2);
+                    nameText.fieldWidth = nameText.textField.textWidth + 10;
+                }
+                nameText.x = k.x+k.width/2-nameText.width/2;
+                nameText.y = k.y - 48;
+
             }
-            nameText.x = k.x+k.width/2-nameText.width/2;
-            nameText.y = k.y - 48;
+            else
+                nameText.text = "";
 
-        }
-        else
-            nameText.text = "";
-
-        if(objUsing == null) {
-            if(FlxG.mouse.justPressed)
-                if(k != null) k.v_use();
-            if(FlxG.mouse.justPressedRight)
-                if(k != null) k.v_look();
-        }
-        else {
-            var p = FlxG.mouse.getPosition();
-            objUsing.x = p.x-objUsing.width/2;
-            objUsing.y = p.y-objUsing.width/2;
-            FlxG.mouse.visible = false;
-            if(FlxG.mouse.justPressed){
-                if(k != null) {
-                    objUsing.v_useOn(k);
+            if(objUsing == null) {
+                if(FlxG.mouse.justPressed)
+                    if(k != null) k.v_use();
+                if(FlxG.mouse.justPressedRight)
+                    if(k != null) k.v_look();
+            }
+            else {
+                var p = FlxG.mouse.getPosition();
+                objUsing.x = p.x-objUsing.width/2;
+                objUsing.y = p.y-objUsing.width/2;
+                FlxG.mouse.visible = false;
+                if(FlxG.mouse.justPressed){
+                    if(k != null) {
+                        objUsing.v_useOn(k);
+                        objUsing = null;
+                        FlxG.mouse.visible = true;
+                    }
+                }
+                if(FlxG.mouse.justPressedRight) {
                     objUsing = null;
                     FlxG.mouse.visible = true;
                 }
             }
-            if(FlxG.mouse.justPressedRight) {
-                objUsing = null;
-                FlxG.mouse.visible = true;
-            }
         }
+        nameText.visible = canInteract;
     }
 
     public function switchRoom(R:String, ?pX:Int, ?pY:Int) {

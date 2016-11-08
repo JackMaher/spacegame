@@ -20,6 +20,11 @@ class Player extends Character {
 
     private function movement():Void {
 
+        if(!game.canInteract) {
+            animation.play("idle");
+            return;
+        }
+
         var _left  = false;
         var _right = false;
 
@@ -39,11 +44,11 @@ class Player extends Character {
 
 
         if (_left){
-            if(walk==null) x -= 5;
+            if(walk==null) x -= walkSpeed;
             flipX = true;
         }
         else if (_right){
-            if(walk==null) x += 5;
+            if(walk==null) x += walkSpeed;
             flipX = false;
         }
         if (_swing){
@@ -97,7 +102,7 @@ class Sodsbury extends Character {
         public function use(){
             walk = null;
             if (alive){
-                say("Good Evening Sir, I'm this Roadmanion Ship personal Robodrone.",null,4); 
+                say("Good Evening Sir, I'm this Roadmanion Ship personal Robodrone.",null,4);
                 say("how may I help you?",null,4);
                 wait(4,respond1);
             }
@@ -160,7 +165,7 @@ class Sodsbury extends Character {
         function op2_3(){
             say("and he was a Roadmanion, and youre just a human");
             wait(4,op2_4);
-        }        
+        }
         function  op2_4(){
             say("You'll also need to turn on the air ventulation system once the power is on",null,5);
             say("You can do that at the Captins Terminal, you'll also need the password",null, 5);
@@ -213,7 +218,7 @@ class Sodsbury extends Character {
             player.option("How can I help repair you?",op4);
             player.option("Goodbye");
             endOptions();
-        }  
+        }
 
         override function kill(){
             animation.play("deadani");
@@ -223,7 +228,7 @@ class Sodsbury extends Character {
         function kill_(){
             animation.play("dead");
         }
-        
+
     }
-    
+
 
