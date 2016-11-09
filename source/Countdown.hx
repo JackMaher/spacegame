@@ -11,7 +11,7 @@ class Countdown extends FlxText {
     public static var done:Bool = false;
     public static var stopped:Bool = true;
 
-    public static function start() {
+    public function start() {
         stopped = false;
         visible = true;
     }
