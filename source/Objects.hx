@@ -16,7 +16,7 @@ class Key extends SmallObject {
 
 
 
-//Cargo 
+//Cargo
 
 
 class Crewmember extends Object {
@@ -144,22 +144,24 @@ class Hammer extends SmallObject{
 
             var _stopSwing = function(){
                 player._swing = false;
+                player._canControl = true;
             }
 
                 var move1 = function() {
                 if(other.n == "sodsbury"){
                     cast(other,Sodsbury).kill();
                 }
-                player._canControl = true;
             }
 
             var _startSwing = function (){
                 player._swing = true;
-                player.facing = FlxObject.RIGHT;
+                if(other.n == "sodsbury") player.flipX = false;
                 wait(0.5, move1);
                 wait(1,_stopSwing);
             }
 
+
+        if(other.n == "Crewmember") {
             function _crewmember(){
                 player.say("Yep... definitely dead");
             }
@@ -167,14 +169,14 @@ class Hammer extends SmallObject{
                 _startSwing();
                 wait(1,_crewmember);
             }
-
-
-        if(other.n == "Crewmember") {
-            if(pixelDistance(player) < 5){
+            function dead1() {
+                player._canControl = false;
+                player.flipX = true;
                 player.say("Is he dead?");
                 wait(1,_crewmemberSwing);
             }
-            //player.say("That would be mean.");
+            player.walkTo(other.tileX() + 10, dead1);
+
         }
         if(other.n =="Manhole"){
             trace("bong");
@@ -185,7 +187,7 @@ class Hammer extends SmallObject{
             player.walkTo(other.tileX()-4, _startSwing);
             cast(other,Sodsbury).flipX = false;
             player._canControl = false;
-            cast(other,Sodsbury).walk = null;   
+            cast(other,Sodsbury).walk = null;
         }
         if (other.n == "Bay Door"){
             player.say("Looks like this door has suffer with abit more than hammer dents");
@@ -193,7 +195,7 @@ class Hammer extends SmallObject{
 
         if(other.n == "Window"){
             player.say("That doesnt seem like a good idea");
-        
+
         }
     }
 }
@@ -299,7 +301,7 @@ class Manhole extends Object {
         Opened = true;
     }
     public function use(){
-        if (Opened == true){ 
+        if (Opened == true){
             game.switchRoom("Powerroom", 167,66);
         }
         else{
@@ -364,7 +366,7 @@ class Cockdoor extends Door{
         newPlayerY = nY;
         locked = true;
 
-    }  
+    }
     override public function update(d){
         super.update(d);
         if (Powerpc._powerOn == true){
@@ -417,7 +419,7 @@ class Railing extends Object{
 class Powercrate extends Object{
     function new(x,y){
         super(x,y);
-    }    
+    }
     function use(){
         if (pixelDistance(player) < 5){
         R.inv.add(new Screwdriver(0,0));
@@ -438,51 +440,57 @@ class Cockwindow extends Object {
     function new (x,y){
         super(x,y);
         customName = "Bay Window";
-    }    
+    }
 }
 
 class Cockpc extends Character{
+    var startedChat:Bool = false;
     function new (x,y){
         super(x,y);
         customName = "Controls";
     }
     function use(x,y){
-        if (game._underattack == true){
-            say("Captain Schmuggler we have you surrounded.");
-            say("There no chance of you getting away this time!");
+        if (game._underattack == true && startedChat == false){
+            player.animation.play("idle");
+            startedChat = true;
+            say("Captain Schmuggler we have you surrounded.",null,4);
+            say("There no chance of you getting away this time!",null,4);
             wait(4, characterResponds);
+        }
     }
-}
-        function characterResponds(){
-            player.say("The Captain is dead, I'm the only one person alive");
-            wait(4, attack1);
-        }
-        function attack1(){
-            say("You think you can fool us so easily Schmuggler?");
-            say("You Roadmanion have attacked our ships for the last time!");
-            wait(4, characterResponds1);
-        }
-        function characterResponds1(){
-            player.say("I'm not a Roadmanion, I'm human I stowaway on the ship before the crew died!");
-            wait (4, attack2);
-        }
-        function attack2(){
-            say("You think you can use the 'I'm just a human stowaway on the ship'");
-            say(" excuses? That’s the oldest trick in the book");
-            say("Prepare to meet your maker Schmuggler");
-            wait(4,characterResponds2);
-        }
-        function characterResponds2(){
-            player.option("Please, you have to believe me",attack3);
-            player.option("See you in hell",attack3);
-            player.option("*yourself* I need to get this ship moving", attack3);
-        }
-        function attack3(){
-            say("Set the ship’s phasers to the murder setting...");
-            wait(5,endgame1);
-        }
-        function endgame1(){
-            FlxG.switchState(new EndGameState());
-        }
+    function characterResponds(){
+        player.say("The Captain is dead, I'm the only one person alive",null,4);
+        wait(4, attack1);
+    }
+    function attack1(){
+        say("You think you can fool us so easily Schmuggler?",null,4);
+        say("You Roadmanion have attacked our ships for the last time!",null,4);
+        wait(4, characterResponds1);
+    }
+    function characterResponds1(){
+        player.say("I'm not a Roadmanion, I'm human I stowaway on the ship before the crew died!",null,4);
+        wait (4, attack2);
+    }
+    function attack2(){
+        say("You think you can use the \"I'm just a human stowaway on the ship\"",null,6);
+        say(" excuses? That’s the oldest trick in the book",null,6);
+        say("Prepare to meet your maker Schmuggler",null,6);
+        wait(6,characterResponds2);
+    }
+    function characterResponds2(){
+        player.option("Please, you have to believe me",attack3);
+        player.option("See you in hell",attack3);
+        player.option("*yourself* I need to get this ship moving", attack3);
+    }
+    function attack3() {
+        wait(3,attack3_wait);
+    }
+    function attack3_wait(){
+        say("Set the ship’s phasers to the murder setting...",null,5);
+        wait(7,endgame1);
+    }
+    function endgame1(){
+        FlxG.switchState(new EndGameState());
+    }
 
 }

@@ -84,6 +84,7 @@ class Player extends Character {
 
 class Sodsbury extends Character {
     var pickedChip:Bool = false;
+    var startedChat:Bool = false;
 
     public function new(x,y):Void {
         super (x,y);
@@ -114,9 +115,12 @@ class Sodsbury extends Character {
         public function use(){
             walk = null;
             if (alive){
+                if(startedChat) {
+                startedChat = true;
                 say("Good Evening Sir, I'm this Roadmanion ship’s personal Robodrone.",null,4);
                 say("how may I help you?",null,4);
                 wait(4,respond1);
+                }
             }
             else if (alive == false && pickedChip == false){
                 R.inv.add(new Bionicchip(0,0));
@@ -129,27 +133,33 @@ class Sodsbury extends Character {
             say("for many years and I'm in need of some maintenance; can you help?",null,5);
             wait(5, characterRespond);
         }
+        function canUse() {
+            startedChat = false;
+        }
         function characterRespond(){
             player.option("What Happened to the Crew?",op1);
-            player.option("Goodbye");
+            player.option("Goodbye", canUse);
             endOptions();
         }
 
-    //Dialog #1
 
-        function op1(){
+    //Dialog #1
+        function op1() {
+            wait(3,op1_wait);
+        }
+        function op1_wait(){
             say("The power generator failed after a rival smugger shot at us.",null,4);
             say("it depleted all of the helium from the ship.",null,4);
             wait(4,op1_1);
         }
         function op1_1(){
-            say("The Roadmanion breath a combination of helium and oxygen");
+            say("The Roadmanion breath a combination of helium and oxygen",null,4);
             wait(4,op1_2);
         }
         function op1_2(){
-            say("if my calculations are right there is around 5 minutes left of");
-            say("Oxygen in the ship before it's all depleted.");
-            wait(3,characterRespond2);
+            say("if my calculations are right there is around 5 minutes left of",null,5);
+            say("Oxygen in the ship before it's all depleted.",null,5);
+            wait(5,characterRespond2);
         }
 
         function characterRespond2(){
@@ -160,7 +170,10 @@ class Sodsbury extends Character {
 
     //Dialog #2
 
-        function op2(){
+        function op2() {
+            wait(3,op2_wait);
+        }
+        function op2_wait(){
             say("I would imagine the power generator room would be best place to start");
             wait (4,op2_1);
         }
@@ -175,12 +188,12 @@ class Sodsbury extends Character {
             wait(4,op2_3);
         }
         function op2_3(){
-            say("and he was a Roadmanion, and you’re just a human");
+            say("and he was a Roadmanion, and you're just a human");
             wait(4,op2_4);
         }
         function  op2_4(){
             say("You'll also need to turn on the air ventilation system once the power is on",null,5);
-            say("You can do that at the Captain’s Terminal, you'll also need the password",null, 5);
+            say("You can do that at the Captain's Terminal, you'll also need the password",null, 5);
             wait(4,characterRespond3);
         }
 
@@ -193,7 +206,10 @@ class Sodsbury extends Character {
 
     //Dialog #3
 
-        function op3(){
+        function op3() {
+            wait(3,op3_wait);
+        }
+        function op3_wait(){
             say("Captain Schmuggler was a great man, he salvaged me from a ship, that he shot down");
             say("He said that I could be useful to him",null,4) ;
             wait(4,op3_1);
@@ -214,7 +230,10 @@ class Sodsbury extends Character {
         }
 
 
-        function op4(){
+        function op4() {
+            wait(3,op4_wait);
+        }
+        function op4_wait(){
             say("Last time Captain Schmuggler used me for entertainment he tied me to a");
             say ("spinning wheel and took shots at me, I think one of the bullets is still lodged in me");
             wait(3,op4_1);
