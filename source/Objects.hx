@@ -59,12 +59,38 @@ class Bedroompc extends Character {
 }
 
 class Bedroomcrate extends Object{
+    public var _bedtrigger:Bool = false;
     function new (x,y){
         super(x,y);
         customName = "Crate";
+        layer = FORE;
     }
     function look(){
         player.say("Am I really gonna do this?");
+    }
+    function use(){
+        if(_bedtrigger== true){
+            player.say("Here we go");
+        }
+    }
+    public function collision(){
+        player.say("Here we go");
+    }
+}
+
+class Bedtrigger extends Object{
+    var done = false;
+    function new (x,y){
+        super(x,y);
+    }
+    override public function update (d){
+        super.update(d);
+        if (pixelDistance(player) ==0 && done == false){
+            cast(currentRoom.get("Crate"), Bedroomcrate).collision();
+            done = true;
+            player._canControl = false;
+            //wait(1,_change);
+        }
     }
 }
 
@@ -104,6 +130,7 @@ class Bed extends Object{
         }
     }
 }
+
 
 //Cargo
 

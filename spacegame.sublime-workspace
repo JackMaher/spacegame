@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"pixel",
+				"pixelDistance( Other : Object )\tInt"
+			],
+			[
+				"sw",
+				"switchState(...)\tVoid"
+			],
+			[
+				"ch",
+				"characterResponds"
+			],
+			[
+				"ter",
+				"TerminalScreen"
+			],
+			[
+				"flx",
+				"FlxCamera\tflixel"
+			],
+			[
+				"gam",
+				"Game\tclass"
+			],
+			[
 				"Halw",
 				"Hallway5"
 			],
@@ -40,16 +64,8 @@
 				"state\tflixel.FlxState"
 			],
 			[
-				"flx",
-				"FlxG\tclass"
-			],
-			[
 				"gen",
 				"generator"
-			],
-			[
-				"ch",
-				"characterRespond3\tfunction"
 			],
 			[
 				"Good",
@@ -126,46 +142,11 @@
 			}
 		},
 		{
-			"file": "source/Game.hx",
-			"settings":
-			{
-				"buffer_size": 4427,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "source/Inventory.hx",
-			"settings":
-			{
-				"buffer_size": 1785,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "source/Rooms.hx",
-			"settings":
-			{
-				"buffer_size": 3414,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "source/TerminalScreen.hx",
 			"settings":
 			{
-				"buffer_size": 6335,
+				"buffer_size": 6996,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "source/Speech.hx",
-			"settings":
-			{
-				"buffer_size": 2140,
 				"line_ending": "Windows"
 			}
 		},
@@ -186,19 +167,19 @@
 			}
 		},
 		{
-			"file": "source/Objects.hx",
+			"file": "source/Rooms.hx",
 			"settings":
 			{
-				"buffer_size": 6845,
+				"buffer_size": 4494,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/HaxeToolkit/haxe/lib/flixel/4,2,0/README.md",
+			"file": "source/Objects.hx",
 			"settings":
 			{
-				"buffer_size": 4817,
+				"buffer_size": 14832,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -207,7 +188,25 @@
 			"file": "source/Characters.hx",
 			"settings":
 			{
-				"buffer_size": 6981,
+				"buffer_size": 7812,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/Countdown.hx",
+			"settings":
+			{
+				"buffer_size": 1193,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/Game.hx",
+			"settings":
+			{
+				"buffer_size": 5246,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -261,6 +260,12 @@
 	],
 	"file_history":
 	[
+		"/C/Users/jacks/Documents/spacegame/source/EndGameState.hx",
+		"/C/Users/jacks/Documents/spacegame/source/WinGameState.hx",
+		"/C/Users/jacks/Documents/spacegame/source/Rooms.hx",
+		"/C/Users/jacks/Documents/spacegame/source/Game.hx",
+		"/C/Users/jacks/Documents/spacegame/source/Inventory.hx",
+		"/C/Users/jacks/Documents/spacegame/source/Speech.hx",
 		"/C/Users/jacks/Documents/spacegame/source/R.hx",
 		"/C/Users/jacks/Documents/spacegame/source/Characters.hx",
 		"/C/Users/jacks/Documents/spacegame/spacegame.sublime-project",
@@ -268,7 +273,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -282,6 +287,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"player",
+			"());\n",
 			"members"
 		],
 		"highlight": true,
@@ -301,7 +308,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -317,8 +324,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								217,
+								217
 							]
 						],
 						"settings":
@@ -330,7 +337,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -359,166 +366,42 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "source/Game.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4427,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3345,
-								3345
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 585.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "source/Inventory.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1785,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								993,
-								993
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "source/Rooms.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3414,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3130,
-								3124
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1350.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "source/TerminalScreen.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6335,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3567,
-								3567
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1170.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "source/Speech.hx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2140,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								391,
-								391
-							]
-						],
-						"settings":
-						{
-							"haxe-build-id": 0,
-							"syntax": "Packages/Haxe/Haxe.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 2,
+					"file": "source/TerminalScreen.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6996,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2860,
+								2860
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 546.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "source/Definitions.hx",
 					"semi_transient": false,
 					"settings":
@@ -530,8 +413,8 @@
 						"selection":
 						[
 							[
-								479,
-								479
+								2330,
+								2334
 							]
 						],
 						"settings":
@@ -542,14 +425,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 277.0,
+						"translation.y": 1280.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 4,
 					"file": "usage.txt",
 					"semi_transient": false,
 					"settings":
@@ -572,27 +455,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 60.0,
+						"translation.y": 52.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "source/Objects.hx",
+					"buffer": 5,
+					"file": "source/Rooms.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6845,
+						"buffer_size": 4494,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6650,
-								6650
+								4153,
+								4153
 							]
 						],
 						"settings":
@@ -603,32 +486,97 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4180.0,
+						"translation.y": 1844.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
-					"file": "/C/HaxeToolkit/haxe/lib/flixel/4,2,0/README.md",
-					"semi_transient": true,
+					"buffer": 6,
+					"file": "source/Objects.hx",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4817,
+						"buffer_size": 14832,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2785,
+								2785
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 779.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "source/Characters.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7812,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2685,
+								2685
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2044.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "source/Countdown.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1193,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								388,
+								388
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -638,20 +586,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
-					"file": "source/Characters.hx",
+					"buffer": 9,
+					"file": "source/Game.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6981,
+						"buffer_size": 5246,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2597,
-								2597
+								1745,
+								1745
 							]
 						],
 						"settings":
@@ -662,10 +610,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1530.0,
+						"translation.y": 273.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -673,7 +621,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 21.0
 	},
 	"input":
 	{
@@ -714,7 +662,7 @@
 	"project": "spacegame.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 38.0
 	},
 	"save_all_on_build": true,
 	"select_file":

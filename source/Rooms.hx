@@ -160,8 +160,20 @@ class Bedroom extends Room{
                     new Lucaslena(15,7),
                     new Bed(55,30),
                     new Poster1(6,8),
+                    new Bedtrigger(95,38),
+                    new Block(98),
+                    new Block(1),
         ];
     }
 }
 
+class Cutscreen extends Room{
+    function new (){
+        super();
+    }
+    override public function create (){
+        objects = [new Player (1,1)
+        ];
+    }
+}
 
