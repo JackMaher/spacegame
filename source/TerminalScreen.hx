@@ -6,9 +6,12 @@ import flixel.text.FlxText;
 import flixel.group.FlxGroup;
 using StringTools;
 using Definitions;
+using Characters;
+using Objects;
 
 class TerminalScreen extends FlxGroup {
-
+    //public var _warning = false;
+    var _shipAttacked = false;
     var textRem:String;
     var bg:FlxSprite;
     var textbox:FlxText;
@@ -44,19 +47,19 @@ class TerminalScreen extends FlxGroup {
             from:"Budgie Schmuggler",
             to:"schmuggles@space.net",
             date:"18/05/2071",
-            body:"If you assault one of my ships again I will find you in whatever spacedock you're in and rip out your intestines and feed them to you.\n\nLoves of love, Mum\n\nP.S Happy Birthday, I've sent you some Holo Cookies xox"
+            body:"If you assault one of my ships again I will find you in whatever spacedock you're in and rip out your intestines and feed them to you.\n\nLots of love, Mum\n\nP.S Happy Birthday, I’ve sent you some Holo Cookies xox"
         },
         {
             from:"<UNKNOWN>",
             to:"Captain Schmuggler",
             date:"16/05/2071",
-            body:"I didn't want to say this to you in person so I figured doing it anonymous would be best. In the past month our crew has gone down from 5 members including you, to 3 including you and that charming smart Robodrone, and I think with the increased workload you should stop removing the heads of some members and using them to 1 aside football."
+            body:"I didn't want to say this to you in person so I figured doing it anonymously would be best. In the past month our crew has gone down from 5 members including you, to 3 including you and that charming smart Robodrone, and I think with the increased workload you should stop removing the heads of some members and using them for 1 aside football."
         },
         {
             from:"Captain Schmuggler",
             to:"Captain Schmuggler",
             date:"12/05/2071",
-            body:"To-do list:\n    Drink\n    Eat\n    Sleep\n    Kick Sodsbury\n    Do pilates\n    Eat\n    Sleep\n\n"
+            body:"To-do list:\n    Drink\n    Eat\n    Sleep\n    Kick Sodsbury\n    Do pilates\n\n Note to self, to get the ship into warp drive I need to shove something into into the control, I should fix this at the next spacedock."
         }
         ];
 
@@ -67,6 +70,21 @@ class TerminalScreen extends FlxGroup {
     function close() {
         FlxG.state.remove(this);
         cast(FlxG.state,Game).canInteract = true;
+        if(_shipAttacked == true){
+            FlxG.camera.shake (0.01,0.5);
+            var game = cast(FlxG.state, Game);
+            var player = game.currentRoom.getCharacter("player");
+                function _attacked1(){
+                cast(game.currentRoom.get("terminal"),Terminal)._warning ();
+            }
+            function _attacked (){
+                player.say("What was that?");
+                player.wait(1,_attacked1);
+            }
+           
+            player.wait(1,_attacked);
+
+        }
         destroy();
     }
 
@@ -97,10 +115,13 @@ class TerminalScreen extends FlxGroup {
                 textRem = '(b) back\n\nSHIP CONTROL\n\n'
                     + 'Ventilation system status: OFFLINE \n\n'
                     + '(v) activate ventilation system';
+                    
             case CONTROL2:
                 online = true;
                 textRem = '(b) back\n\nSHIP CONTROL\n\n'
                     + 'Ventilation system status: ONLINE \n\n';
+                    Game.countdown.stop();
+                    _shipAttacked = true;
         }
         return view = V;
     }

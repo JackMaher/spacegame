@@ -7,6 +7,7 @@ import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
+import flixel.FlxCamera;
 using Definitions;
 import Objects;
 import Rooms;
@@ -17,6 +18,7 @@ using Lambda;
 class Game extends FlxState {
 
     public static var ROOM_HEIGHT:Int;
+    public var _underattack = false;
     public static var ROOM_TOP:Int;
     public static var SCALE_FACTOR:Int = 8;
     public var currentRoom:Room;
