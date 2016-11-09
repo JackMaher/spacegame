@@ -55,7 +55,7 @@ class Game extends FlxState {
         layers.set(Definitions.Layer.CHAR, charLayer);
         layers.set(Definitions.Layer.FORE, foreLayer);
 
-            switchRoom("Powerroom");
+            switchRoom("Bedroom");
 
         add(mouse=new FlxSprite(FlxG.width/2,850).loadGraphic("assets/images/mouse.png"));
         mouse.origin.set(mouse.width/2,0);
