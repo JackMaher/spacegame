@@ -34,8 +34,12 @@ class Game extends FlxState {
     public static var countdown:Countdown;
 
     public var layers:Map<Definitions.Layer, FlxGroup> = new Map();
+    var mouse:FlxSprite;
 
     var rooms:Map<String, Room> = new Map();
+
+    var prevLeft:Bool=false;
+    var prevRight:Bool=false;
 
     override public function create():Void {
         ROOM_HEIGHT = 800;
@@ -53,7 +57,6 @@ class Game extends FlxState {
 
             switchRoom("Powerroom");
 
-            var mouse;
         add(mouse=new FlxSprite(FlxG.width/2,850).loadGraphic("assets/images/mouse.png"));
         mouse.origin.set(mouse.width/2,0);
         mouse.scale.set(SCALE_FACTOR,SCALE_FACTOR);
@@ -126,6 +129,23 @@ class Game extends FlxState {
             }
         }
         nameText.visible = canInteract;
+
+        if(FlxG.mouse.pressed != prevLeft) {
+            if(FlxG.mouse.pressed)
+                mouse.replaceColor(0xff9f9f9f, 0xffff7700);
+            else
+                mouse.replaceColor(0xffff7700, 0xff9f9f9f);
+        }
+        if(FlxG.mouse.pressedRight != prevRight) {
+            if(FlxG.mouse.pressedRight)
+                mouse.replaceColor(0xffa0a0a0, 0xffff7701);
+            else
+                mouse.replaceColor(0xffff7701, 0xffa0a0a0);
+        }
+        prevLeft  = FlxG.mouse.pressed;
+        prevRight = FlxG.mouse.pressedRight;
+
+
     }
 
     public function switchRoom(R:String, ?pX:Int, ?pY:Int) {

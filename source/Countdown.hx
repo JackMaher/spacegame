@@ -31,11 +31,11 @@ class Countdown extends FlxText {
     }
 
     public function get_minsLeft() {
-        return Std.int(Math.ceil(time) /60);
+        return Std.int(Math.floor(time) /60);
     }
 
     public function get_secsLeft() {
-        return Std.int(Math.ceil(time) % 60);
+        return Std.int(Math.floor(time) % 60);
     }
 
     public function stop() {
