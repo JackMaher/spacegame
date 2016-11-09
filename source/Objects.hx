@@ -14,7 +14,78 @@ import flixel.math.FlxPoint;
 class Key extends SmallObject {
 }
 
+//Bedroom
+class Bedroompc extends Character {
+    var startedChat:Bool = false;
+    function new(x,y){
+        super(x,y);
+        customName = "PC";
+        layer = BACK;
+    }
+    function use(){
+        if (pixelDistance(player) < 5 && startedChat == false){
+            startedChat = true;
+            say("Dear Richard Sparrow",FlxColor.MAGENTA);
+            say("I regret to inform you that we will no longer be continuing with your",FlxColor.MAGENTA);
+            say("employment at Dr Popp Incorprated, with immediate effect.",FlxColor.MAGENTA);
+            wait(5,bedroom1);
+        }
+    }
+    function bedroom1(){
+        say("Please let me know of any belongings you may have",FlxColor.MAGENTA);
+        say( "left in the office and I will get these to you",FlxColor.MAGENTA);
+        wait(4,bedroom2);
+    }
+    function bedroom2 (){
+        player.say("Great, fired again! Steven is such a jerk. it wasn't even that serious,");
+        player.say(" just one minor engine-room meltdown!"); 
+        wait (4, bedroom3);
+    }
+    function bedroom3(){
+        player.say("I don't know why I even bother staying around here,");
+        player.say(" I might as well ship myself off to the farthest corner of the galaxy");
+        player.say(" and start again. ");
+        wait (4, bedroom4);
+    }
+    function bedroom4(){
+        //player.say("off to the farthest corner of the galaxy and start again.");
+        player.say(" This crate looks almost my size...");
+        startedChat = false;
+    }
+}
 
+class Bedroomcrate extends Object{
+    function new (x,y){
+        super(x,y);
+        customName = "Crate";
+    }
+    function look(){
+        player.say("Am I really gonna do this?");
+    }
+}
+
+class Lucaslena extends Object{
+    function new (x,y){
+        super (x,y);
+        customName = "Poster";
+    }
+    function look(){
+        player.say("I dreamed of becoming space adventurer like Lucas Lena, maybe one day");
+    }
+}
+
+class Bed extends Object{
+    function new (x,y){
+        super (x,y);
+        customName = "Bed";
+    }
+    function look(){
+        player.say("I should really make my bed");
+    }
+    function use(){
+        player.say("This is no time to sleep");
+    }
+}
 
 //Cargo
 

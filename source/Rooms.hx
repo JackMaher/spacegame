@@ -149,4 +149,18 @@ class Cockpit extends Room{
     }
 }
 
+class Bedroom extends Room{
+    public function new(){
+        super();
+    }
+    override public function create (){
+        objects = [new Player(40,22),
+                    new Bedroompc(10,22),
+                    new Bedroomcrate(83,10),
+                    new Lucaslena(15,7),
+                    new Bed(55,30)
+        ];
+    }
+}
+
 

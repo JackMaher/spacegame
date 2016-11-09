@@ -115,7 +115,7 @@ class Sodsbury extends Character {
         public function use(){
             walk = null;
             if (alive){
-                if(startedChat) {
+                if(startedChat == false) {
                 startedChat = true;
                 say("Good Evening Sir, I'm this Roadmanion ship’s personal Robodrone.",null,4);
                 say("how may I help you?",null,4);

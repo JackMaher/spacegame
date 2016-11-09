@@ -5,7 +5,7 @@ import flixel.FlxG;
 using StringTools;
 
 class Countdown extends FlxText {
-    var time:Float = 500;
+    var time:Float = 300;
     public var minsLeft(get,never):Int;
     public var secsLeft(get,never):Int;
     public static var done:Bool = false;
