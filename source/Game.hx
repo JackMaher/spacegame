@@ -51,9 +51,12 @@ class Game extends FlxState {
         layers.set(Definitions.Layer.CHAR, charLayer);
         layers.set(Definitions.Layer.FORE, foreLayer);
 
-            switchRoom("Bedroom");
+            switchRoom("Powerroom");
 
-        add(new FlxSprite(0,880).makeGraphic(FlxG.width,20,0xff333333));
+            var mouse;
+        add(mouse=new FlxSprite(FlxG.width/2,850).loadGraphic("assets/images/mouse.png"));
+        mouse.origin.set(mouse.width/2,0);
+        mouse.scale.set(SCALE_FACTOR,SCALE_FACTOR);
 
         nameText = new FlxText(0,FlxG.height-48,FlxG.width);
         nameText.setFormat("assets/fonts/PIXELADE.TTF");

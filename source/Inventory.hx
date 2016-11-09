@@ -14,7 +14,7 @@ class Inventory extends FlxTypedGroup<SmallObject> {
     public static inline var SLOT_SIZE:Int = 60;
 
     static inline var X:Int = 1500;
-    static inline var Y:Int = 920;
+    static inline var Y:Int = 850;
 
     public function new() {
         super();

@@ -12,7 +12,7 @@ class Countdown extends FlxText {
     public static var stopped:Bool = false;
 
     public function new() {
-        super(0,920,420,"");
+        super(0,850,420,"");
         setFormat("assets/fonts/PIXELADE.TTF");
         size = 64;
         alignment = RIGHT;
