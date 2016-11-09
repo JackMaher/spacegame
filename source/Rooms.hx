@@ -158,7 +158,8 @@ class Bedroom extends Room{
                     new Bedroompc(10,22),
                     new Bedroomcrate(83,10),
                     new Lucaslena(15,7),
-                    new Bed(55,30)
+                    new Bed(55,30),
+                    new Poster1(6,8),
         ];
     }
 }
