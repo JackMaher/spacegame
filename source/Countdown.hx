@@ -33,6 +33,7 @@ class Countdown extends FlxText {
             var secs = Std.string(secsLeft).lpad("0",2);
             if(time < 0) done = true;
             else text = '$minsLeft:$secs';
+
         }
     }
 

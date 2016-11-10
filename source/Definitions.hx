@@ -259,6 +259,7 @@ class Object extends FlxSprite {
     public var game(get,never):Game;
     var timers:Array<FlxTimer> = [];
     var gameX:Int;
+    public var hidden:Bool = false;
     var gameY:Int;
 
 

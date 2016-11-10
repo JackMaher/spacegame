@@ -15,6 +15,224 @@ class Key extends SmallObject {
 }
 
 //Bedroom
+class Person1 extends Character{
+    function new (x,y){
+        super(x,y);
+        visible = false;
+        hidden = true;
+    }
+}
+
+class Person2 extends Character{
+    function new (x,y){
+        super(x,y);
+        visible = false;
+        hidden = true;
+    }
+}
+
+class Person3 extends Character{
+    function new (x,y){
+        super (x,y);
+        visible = false;
+        hidden = true;
+    }
+}
+
+class Person4 extends Character{
+    function new(x,y){
+        super(x,y);
+        visible = false;
+        hidden = true;
+    }
+}
+
+class Person5 extends Character{
+    function new(x,y){
+        super(x,y);
+        visible = false;
+        hidden = true;
+    }
+}
+
+class Cutcreen extends Object {
+    public var _fadeout = false;
+    function new(x,y){
+        super(x,y);
+        layer = FORE;
+        alpha = 0;
+    }
+    function cutStart(){
+        //when alpha hits 1
+        var p1 = cast(currentRoom.get("person1"),Person1);
+        var p2 = cast(currentRoom.get("person2"),Person2);
+        var p3 = cast(currentRoom.get("person3"),Person3);
+        var p4 = cast(currentRoom.get("person4"),Person4);
+        var p5 = cast(currentRoom.get("person5"),Person5);
+
+
+        function cut14(){
+            game.switchRoom("Cargo",128,32);
+            game.canInteract = true;
+        }
+
+        function cut13(){
+            FlxG.camera.shake(0.005,1);
+            p5.say("Ship Under Attack, generators have been damaged, helium reserve depleted, low reserve of Oxygen.",FlxColor.RED,4);
+            wait(4,cut14);
+
+        }
+
+        function cut12(){
+            p4.say("-Few hours later-");
+            wait(3,cut13);
+        }
+
+        function cut11(){
+            player.say("Oh god whats going on");
+            wait(4,cut12);
+        }
+
+
+        function cut10(){
+            p3.say("You there get all these crates onto our ship before anyone shows up", FlxColor.GREEN,4);
+            wait(5,cut11);
+        }
+
+        function cut9(){
+            FlxG.camera.shake(0.005,0.5);
+            p3.say("Crew is taken care of and the ship is set to crash into the nearly metor, the perfect crime", FlxColor.GREEN,4);
+            wait(5,cut10);
+        }
+
+        function cut8(){
+            FlxG.camera.shake(0.005,0.5);
+            p1.say("The ship is under attack find somewhere to hide",FlxColor.PURPLE);
+            wait(5,cut9);
+        }
+
+        function cut7(){
+            p2.say("Oh ok",FlxColor.BLUE,2);
+            wait(3,cut8);
+        }
+
+        function cut6(){
+            player.say("Nothing",null,1);
+            wait(1,cut7);
+        }
+
+        function cut5(){
+            p2.say("What was that?",FlxColor.BLUE,1);
+            wait(1,cut6);
+        }
+
+        function cut4(){
+            player.say("OW",null,1);
+            wait(1,cut5);
+        }
+
+        function cut3(){
+            FlxG.camera.shake(0.005,0.2);
+            p2.say("Done",FlxColor.BLUE,1);
+            wait(1,cut4);
+        }
+
+        function cut2(){
+            p2.say("Christ this is heavy",FlxColor.BLUE,4);
+            wait(4,cut3);
+        }
+
+        function cut1(){
+            p1.say("Ok Gary, move that crate over there",FlxColor.PURPLE,3);
+            wait(3,cut2);
+        }
+
+
+        wait(2,cut1);
+
+    }
+
+    public override function update (d){
+        super.update(d);
+        if (_fadeout == true){
+            alpha += 0.005;
+            if(alpha >= 1){
+                _fadeout = false;
+                cutStart();
+            }
+        }
+    }
+}
+
+class Fadein extends Object{
+    public var _fadein = true;
+    var done = false;
+    function new(x,y){
+        super(x,y);
+        layer = FORE;
+        alpha = 1;
+    }
+    public override function update (d){
+        super.update(d);
+        if (_fadein == true && done == false){
+            alpha -= 0.005;
+            if(alpha <= 0){
+                _fadein = false;
+                done = true;
+                Game.countdown.start();
+            }
+        }
+    }
+}
+
+class Reporter extends Character{
+    public var _reporter = false;
+    function new (x,y){
+        super(x,y);
+        layer = FORE;
+        hidden = true;
+        visible = false;
+    }
+}
+
+class Deadfadeout extends Object {
+    public var _deadfade = true;
+    var _rp:Reporter;
+    var done = false;
+    function new(x,y){
+        super(x,y);
+        layer = FORE;
+        alpha = 0;
+    }
+
+            function rp3(){
+            _rp.say(" more on this story at 9.",FlxColor.RED,5);
+            }
+            function rp2(){
+                _rp.say(" casuing a devastating explosions killing everyone onbord,",FlxColor.RED,5);
+                wait(5,rp3);
+            }
+            function rp1(){
+                _rp.say("Breaking News, a Roadmanion Ship containing two Roadmanion and a Human has crashed into 'Spaceport x9521'",FlxColor.RED,5);
+                wait(5,rp2);
+            }
+    public override function update (d){
+        super.update(d);
+        if (_deadfade == true && done == false){
+            alpha += 0.005;
+            if(alpha >= 1){
+                var rp = new Reporter (0,0);
+                currentRoom.objects.push(rp);
+                rp.x = FlxG.width/2-rp.width/2;
+                rp.y = Game.ROOM_HEIGHT/2-rp.height/2+Game.ROOM_TOP;
+                _rp=cast(currentRoom.get("reporter"),Reporter);
+                done = true;
+                wait(2,rp1);
+            }
+        }
+    }
+}
+
 class Bedroompc extends Character {
     var startedChat:Bool = false;
     function new(x,y){
@@ -22,12 +240,16 @@ class Bedroompc extends Character {
         customName = "PC";
         layer = BACK;
     }
+    function look(){
+        player.say("My vintage Cathode Ray Tubed Personal Computer");
+    }
     function use(){
-        if (pixelDistance(player) < 5 && startedChat == false){
+        if (pixelDistance(player) < 4 && startedChat == false){
             startedChat = true;
-            say("Dear Richard Sparrow",FlxColor.MAGENTA,4);
-            say("I regret to inform you that we will no longer be continuing with your",FlxColor.MAGENTA,4);
-            say("employment at Dr Popp Incorprated, with immediate effect.",FlxColor.MAGENTA,4);
+            say("Dear Richard Sparrow",FlxColor.GRAY,4);
+            say("I regret to inform you that we will no longer be continuing with your",FlxColor.GRAY,4);
+            say("employment at Dr Popp Incorprated, with immediate effect.",FlxColor.GRAY,4);
+            game.canInteract = false;
             wait(5,bedroom1);
         }
         if (pixelDistance(player)>5 && startedChat == false){
@@ -35,8 +257,8 @@ class Bedroompc extends Character {
         }
     }
     function bedroom1(){
-        say("Please let me know of any belongings you may have",FlxColor.MAGENTA,4);
-        say( "left in the office and I will get these to you",FlxColor.MAGENTA,4);
+        say("Please let me know of any belongings you may have",FlxColor.GRAY,4);
+        say( "left in the office and I will get these to you",FlxColor.GRAY,4);
         wait(6,bedroom2);
     }
     function bedroom2 (){
@@ -54,6 +276,7 @@ class Bedroompc extends Character {
         //player.say("off to the farthest corner of the galaxy and start again.");
         player.say(" This crate looks almost my size...");
         startedChat = false;
+        game.canInteract = true;
     }
     
 }
@@ -74,7 +297,7 @@ class Bedroomcrate extends Object{
         }
     }
     public function collision(){
-        player.say("Here we go");
+        player.say("Here we go",null,1.5);
     }
 }
 
@@ -89,6 +312,8 @@ class Bedtrigger extends Object{
             cast(currentRoom.get("Crate"), Bedroomcrate).collision();
             done = true;
             player._canControl = false;
+            game.canInteract = false;
+            cast(currentRoom.get("cutcreen"),Cutcreen)._fadeout = true;
             //wait(1,_change);
         }
     }
@@ -100,7 +325,7 @@ class Lucaslena extends Object{
         customName = "Poster";
     }
     function look(){
-        player.say("I dreamed of becoming space adventurer like Lucas Lena, maybe one day");
+        player.say("I dreamt of becoming space adventurer like Lucas Lena... maybe one day");
     }
 }
 class Poster1 extends Object {
@@ -338,7 +563,8 @@ class Screwdriver extends SmallObject{
     }
     function useOn(other:Character){
         if(other.n=="Controls" && game._underattack == true){
-            FlxG.switchState(new WinGameState());
+            game.switchRoom("Spacebattle",128,32);
+            cast(currentRoom,Spacebattle).Enterspace();
         }
     }
 
@@ -442,7 +668,7 @@ class Powerpc extends Character {
     function new(x,y) {
         super(x,y);
         customName = "Computer";
-        layer = FORE;
+        layer = BACK;
     }
 
     function use(){
@@ -505,9 +731,14 @@ class Terminal extends Character{
     function new(x,y){
         super(x,y);
     }
+
+    function _warning2(){
+        game.canInteract = true;
+    }
     public function _warning(){
         say("Captin to Cockpit, the ship is under sttack", FlxColor.RED);
         game._underattack = true;
+        wait(1,_warning2);
 
     }
 
@@ -535,6 +766,7 @@ class Railing extends Object{
 class Powercrate extends Object{
     function new(x,y){
         super(x,y);
+        customName = "Cargo";
     }
     function use(){
         if (pixelDistance(player) < 5){
@@ -548,19 +780,33 @@ class Powercrate extends Object{
 class EmptyCrate1 extends Object {
     function new (x,y){
         super(x,y,"powercrate");
-        customName = "Empty Crate";
+        customName = "Empty Cargo";
     }
 }
 
 class Cockwindow extends Object {
+    public var _attack:Bool = false;
     function new (x,y){
         super(x,y);
+        origin.set(0,0);
+        loadGraphic("assets/images/cockwindow.png", true, 59,54);
+        animation.add("default",[0],1,false);
+        animation.add("attack",[1,2,3,4,5],5,true);
         customName = "Bay Window";
+        updateHitbox();
+
+    }
+    public override function update(d){
+        super.update(d);
+        if (_attack == false){
+            animation.play("default");
+        }
     }
 }
 
 class Cockpc extends Character{
     var startedChat:Bool = false;
+
     function new (x,y){
         super(x,y);
         customName = "Controls";
@@ -596,17 +842,65 @@ class Cockpc extends Character{
     function characterResponds2(){
         player.option("Please, you have to believe me",attack3);
         player.option("See you in hell",attack3);
-        player.option("*yourself* I need to get this ship moving", attack3);
+        player.option("-Yaourself- I need to get this ship moving", attack3);
     }
     function attack3() {
         wait(3,attack3_wait);
     }
     function attack3_wait(){
-        say("Set the ship’s phasers to the murder setting...",null,5);
-        wait(7,endgame1);
+        say("Set the ship’s phasers to the murder setting in 10...",null,5);
+        wait(5,attack3_wait1);
+    }
+    function attack3_wait1(){
+        FlxG.camera.shake(0.001,8);
+        player.say("I gotta do something quick before I'm blown out of the air");
+        wait(8,attack3_wait2);
+    }
+    function attack3_wait2(){
+        var cw = cast(currentRoom.get("Bay Window"),Cockwindow);
+        FlxG.camera.shake(0.005,2);
+        cw._attack = true;
+        cw.animation.play("attack");
+        wait(2,endgame1);
     }
     function endgame1(){
-        FlxG.switchState(new EndGameState());
+        FlxG.camera.shake(0.01,3);
+        player.ending1();
     }
 
 }
+
+
+class Rustship extends Object{
+    function new (x,y){
+        super (x,y);
+    }
+    public override function update (d){
+        super.update(d);
+        x+=10;
+        y+=8;
+    }
+}
+
+class Eship extends Object{
+    function new (x,y){
+        super (x,y);
+    }
+}
+
+class Spacestation extends Object {
+    function new (x,y){
+        super (x,y);
+        origin.set(0,0);
+        loadGraphic("assets/images/spacestation.png",true, 24,24);
+        animation.add("_idle", [0,1,2,3,4,5],4,true);
+        animation.play("_idle");
+        layer = FORE;
+        updateHitbox();
+    }
+    public override function update(d){
+        super.update(d);
+        animation.play("_idle");
+    }
+}
+

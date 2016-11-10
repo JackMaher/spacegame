@@ -80,6 +80,8 @@ class TerminalScreen extends FlxGroup {
             function _attacked (){
                 player.say("What was that?");
                 player.wait(1,_attacked1);
+                player.animation.play("idle");
+                game.canInteract = false;
             }
            
             player.wait(1,_attacked);

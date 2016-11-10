@@ -65,7 +65,7 @@ class Player extends Character {
             animation.play("swing");
         }
         else if(_dead){
-            animation.play("dead");
+        
         }
         else if (_moving){
             /*_sndStep.play();*/
@@ -74,14 +74,30 @@ class Player extends Character {
         else {
             animation.play("idle");
         }
-        if(Countdown.done){
-            _dead = true;
-           game.canInteract = false;
+        if(Countdown.done && _dead == false){
+            _die();
         }
+
+    }
+
+
+    function _die(){
+            _dead = true;
+            animation.play("dead");
+            game.canInteract = false;
+            var df = new Deadfadeout(0,0);
+            currentRoom.objects.push(df);
+            df.x = FlxG.width/2-df.width/2;
+            df.y = Game.ROOM_HEIGHT/2-df.height/2+Game.ROOM_TOP;
+    }
+       public function ending1(){
+            game.canInteract = false;
+            var df = new Deadfadeout(0,0);
+            currentRoom.objects.push(df);
+            df.x = FlxG.width/2-df.width/2;
+            df.y = Game.ROOM_HEIGHT/2-df.height/2+Game.ROOM_TOP;
     }
 }
-
-
 class Sodsbury extends Character {
     var pickedChip:Bool = false;
     var startedChat:Bool = false;

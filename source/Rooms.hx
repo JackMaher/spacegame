@@ -94,6 +94,7 @@ class Cargo extends Room{
     public function new(){
         super();
     }
+
     override public function create (){
         objects = [ new Player(128,32),
                     new Crewmember(4,34),
@@ -102,7 +103,8 @@ class Cargo extends Room{
                     new Baydoor(42,6),
                     new Crate2(128,20),
                     new Block(2),
-                    new Block(147)];
+                    new Block(147),
+                    new Fadein(0,0)];
     }
 
 }
@@ -126,7 +128,9 @@ class Powerroom extends Room{
         objects = [new Player(0,0),
                     new Powerpc(140,67),
                     new Ladder(168,2),
-                    new Powercrate(180,53)
+                    new Powercrate(180,53),
+                    new Block(192),
+                    new Block(139)
         ];
     }
 
@@ -149,6 +153,34 @@ class Cockpit extends Room{
     }
 }
 
+class Spacebattle extends Room{
+    public function new(){
+        super();
+        origin.x = 0;
+        loadGraphic("assets/images/spacebattle.png", true, 195, 88);
+        animation.add("go", [0,1,2,3,4,5,6,7,8,9,10,11],5,false);
+        animation.add("stop",[11],0);
+        animation.play("stop");
+        updateHitbox();
+        layer = FORE;
+        x = roomPos(0,0).x;
+    }
+
+
+    override public function create(){
+        objects = [new Player(1,1),
+                    new Spacestation(124,4),
+                    //new Playership(32,16)
+        ];
+    }
+
+  public  function Enterspace (){
+        animation.play("go");
+    }
+}
+
+
+
 class Bedroom extends Room{
     public function new(){
         super();
@@ -163,6 +195,12 @@ class Bedroom extends Room{
                     new Bedtrigger(95,38),
                     new Block(98),
                     new Block(1),
+                    new Cutcreen(0,0),
+                    new Person1(48,23),
+                    new Person2(61,21),
+                    new Person3(12,23),
+                    new Person4(50,33),
+                    new Person5(50,6)
         ];
     }
 }
@@ -172,7 +210,8 @@ class Cutscreen extends Room{
         super();
     }
     override public function create (){
-        objects = [new Player (1,1)
+        objects = [new Player (1,1),
+
         ];
     }
 }
