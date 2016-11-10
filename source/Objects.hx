@@ -589,11 +589,13 @@ class RightDoor extends Object {
 class RoomTrigger extends Trigger{
     var newRoom:String;
     var newX:Int;
+
     var newY:Int;
 
     function new (x,nRoom,nX,nY){
         super (x);
         newRoom = nRoom;
+        visible = false;
         newX = nX;
         newY = nY;
 
