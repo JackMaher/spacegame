@@ -158,9 +158,10 @@ class Spacebattle extends Room{
         super();
         origin.x = 0;
         loadGraphic("assets/images/spacebattle.png", true, 195, 88);
-        animation.add("go", [0,1,2,3,4,5,6,7,8,9,10,11],5,false);
-        animation.add("stop",[11],0);
-        animation.play("stop");
+        animation.add("go", [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32],4,false);
+        animation.add("stop",[32],0);
+        animation.add("start",[0],0);
+        animation.play("start");
         updateHitbox();
         layer = FORE;
         x = roomPos(0,0).x;
@@ -170,14 +171,30 @@ class Spacebattle extends Room{
     override public function create(){
         objects = [new Player(1,1),
                     new Spacestation(124,4),
+                    new FadeinSpace(0,0),
+                    new Pship(32,16)
                     //new Playership(32,16)
         ];
     }
+    function cutscene1 (start){
+        animation.finishCallback = null;
+        animation.play("stop");
+    }
+    function cutscene(){
+        animation.play("go");
+        animation.finishCallback = cutscene1;
+    }
 
   public  function Enterspace (){
-        animation.play("go");
-    }
+    var _ps=cast(currentRoom.get("pship"),Pship);
+    if (cast(currentRoom.get("fadeinspace"),FadeinSpace).done == true){
+        _ps.say("I guess I just jam this screw driver into here, and go?",null,5);
+        wait(5,cutscene);
+        }
+    } 
+
 }
+
 
 
 

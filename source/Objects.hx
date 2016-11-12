@@ -185,6 +185,35 @@ class Fadein extends Object{
     }
 }
 
+class Pship extends Character{
+    function new(x,y){
+        super(x,y);
+        layer = FORE;
+        visible = false;
+    }
+}
+
+class FadeinSpace extends Object{
+    public var _fadeinSpace = true;
+    public var done = false;
+    function new(x,y){
+        super(x,y);
+        layer = FORE;
+        alpha = 1;
+    }
+    public override function update (d){
+        super.update(d);
+        if (_fadeinSpace == true && done == false){
+            alpha -= 0.005;
+            if(alpha <= 0){
+                _fadeinSpace = false;
+                done = true;
+                cast(currentRoom,Spacebattle).Enterspace();
+            }
+        }
+    }
+}
+
 class Reporter extends Character{
     public var _reporter = false;
     function new (x,y){
@@ -516,7 +545,7 @@ class Hammer extends SmallObject{
                 player.say("Is he dead?");
                 wait(1,_crewmemberSwing);
             }
-            player.walkTo(other.tileX() + 10, dead1);
+            player.walkTo(other.tileX() + 7, dead1);
 
         }
         if(other.n =="Manhole"){
@@ -564,7 +593,6 @@ class Screwdriver extends SmallObject{
     function useOn(other:Character){
         if(other.n=="Controls" && game._underattack == true){
             game.switchRoom("Spacebattle",128,32);
-            cast(currentRoom,Spacebattle).Enterspace();
         }
     }
 
