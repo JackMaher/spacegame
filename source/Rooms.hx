@@ -165,6 +165,7 @@ class Spacebattle extends Room{
         updateHitbox();
         layer = FORE;
         x = roomPos(0,0).x;
+        y = roomPos(0,0).y;
     }
 
 
