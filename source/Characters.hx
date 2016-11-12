@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import flixel.util.FlxColor;
 using Objects;
 using Definitions;
 using Game;
@@ -133,8 +134,8 @@ class Sodsbury extends Character {
             if (alive){
                 if(startedChat == false) {
                 startedChat = true;
-                say("Good Evening Sir, I'm this Roadmanion ship’s personal Robodrone.",null,4);
-                say("how may I help you?",null,4);
+                say("Good Evening Sir, I'm this Roadmanion ship’s personal Robodrone.",FlxColor.ORANGE,4);
+                say("how may I help you?",FlxColor.ORANGE,4);
                 wait(4,respond1);
                 }
             }
@@ -145,8 +146,8 @@ class Sodsbury extends Character {
 
         }
         function respond1(){
-            say("May I ask for you assistance? Captain Schmuggler has left me in disarray.",null,5);
-            say("for many years and I'm in need of some maintenance; can you help?",null,5);
+            say("May I ask for you assistance? Captain Schmuggler has left me in disarray.",FlxColor.ORANGE,5);
+            say("for many years and I'm in need of some maintenance; can you help?",FlxColor.ORANGE,5);
             wait(5, characterRespond);
         }
         function canUse() {
@@ -164,17 +165,17 @@ class Sodsbury extends Character {
             wait(3,op1_wait);
         }
         function op1_wait(){
-            say("The power generator failed after a rival smugger shot at us.",null,4);
-            say("it depleted all of the helium from the ship.",null,4);
+            say("The power generator failed after a rival smugger shot at us.",FlxColor.ORANGE,4);
+            say("it depleted all of the helium from the ship.",FlxColor.ORANGE,4);
             wait(4,op1_1);
         }
         function op1_1(){
-            say("The Roadmanion breath a combination of helium and oxygen",null,4);
+            say("The Roadmanion breath a combination of helium and oxygen",FlxColor.ORANGE,4);
             wait(4,op1_2);
         }
         function op1_2(){
-            say("if my calculations are right there is around 5 minutes left of",null,5);
-            say("Oxygen in the ship before it's all depleted.",null,5);
+            say("if my calculations are right there is around 5 minutes left of",FlxColor.ORANGE,5);
+            say("Oxygen in the ship before it's all depleted.",FlxColor.ORANGE,5);
             wait(5,characterRespond2);
         }
 
@@ -190,26 +191,26 @@ class Sodsbury extends Character {
             wait(3,op2_wait);
         }
         function op2_wait(){
-            say("I would imagine the power generator room would be best place to start");
+            say("I would imagine the power generator room would be best place to start",FlxColor.ORANGE);
             wait (4,op2_1);
         }
         function op2_1(){
-            say("If you go back where you came from you will",null,4);
-            say("see a rusted manhole leading there",null, 4);
+            say("If you go back where you came from you will",FlxColor.ORANGE,4);
+            say("see a rusted manhole leading there",FlxColor.ORANGE, 4);
             wait (4,op2_2);
         }
         function op2_2(){
-            say("Good luck trying to open it,");
-            say(" Captain Schmuggler always had trouble with it.");
+            say("Good luck trying to open it,",FlxColor.ORANGE);
+            say(" Captain Schmuggler always had trouble with it.",FlxColor.ORANGE);
             wait(4,op2_3);
         }
         function op2_3(){
-            say("and he was a Roadmanion, and you're just a human");
+            say("and he was a Roadmanion, and you're just a human",FlxColor.ORANGE);
             wait(4,op2_4);
         }
         function  op2_4(){
-            say("You'll also need to turn on the air ventilation system once the power is on",null,5);
-            say("You can do that at the Captain's Terminal, you'll also need the password",null, 5);
+            say("You'll also need to turn on the air ventilation system once the power is on",FlxColor.ORANGE,5);
+            say("You can do that at the Captain's Terminal, you'll also need the password",FlxColor.ORANGE, 5);
             wait(4,characterRespond3);
         }
 
@@ -226,17 +227,17 @@ class Sodsbury extends Character {
             wait(3,op3_wait);
         }
         function op3_wait(){
-            say("Captain Schmuggler was a great man, he salvaged me from a ship, that he shot down");
-            say("He said that I could be useful to him",null,4) ;
+            say("Captain Schmuggler was a great man, he salvaged me from a ship, that he shot down",FlxColor.ORANGE);
+            say("He said that I could be useful to him",FlxColor.ORANGE,4) ;
             wait(4,op3_1);
         }
         function op3_1(){
-            say("For fun he used to tie me to the front of the ship as a sort of hood ornament",null,4);
-            say("and used me for target pratice.",null,4);
+            say("For fun he used to tie me to the front of the ship as a sort of hood ornament",FlxColor.ORANGE,4);
+            say("and used me for target pratice.",FlxColor.ORANGE,4);
             wait(4,op3_2);
         }
         function op3_2(){
-            say("He will be missed",null,4);
+            say("He will be missed",FlxColor.ORANGE,4);
             wait(4,characterRespond4);
         }
         function characterRespond4(){
@@ -250,13 +251,13 @@ class Sodsbury extends Character {
             wait(3,op4_wait);
         }
         function op4_wait(){
-            say("Last time Captain Schmuggler used me for entertainment he tied me to a");
-            say ("spinning wheel and took shots at me, I think one of the bullets is still lodged in me");
+            say("Last time Captain Schmuggler used me for entertainment he tied me to a",FlxColor.ORANGE);
+            say ("spinning wheel and took shots at me, I think one of the bullets is still lodged in me",FlxColor.ORANGE);
             wait(3,op4_1);
         }
         function op4_1(){
-            say("contrary to popular belief Robodrones can feel pain, and I'm in a lot of it",null,5);
-            say("if you could find away to remove the bullet I would forever be in your debt.",null,5);
+            say("contrary to popular belief Robodrones can feel pain, and I'm in a lot of it",FlxColor.ORANGE,5);
+            say("if you could find away to remove the bullet I would forever be in your debt.",FlxColor.ORANGE,5);
             wait(3,characterRespond5);
         }
 

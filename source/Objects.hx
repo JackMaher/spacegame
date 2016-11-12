@@ -415,7 +415,7 @@ class Crate extends Object {
         R.inv.add(new Hammer(0,0));
         currentRoom.addObject(new EmptyCrate(106, 39));
         currentRoom.remObject(this);
-        player.say("Ohhh a hammer!");
+        player.say("Oh a hammer!");
 
         }
         else{
@@ -449,8 +449,22 @@ class Crate2 extends Object {
         layer = FORE;
 
     }
+    function look(){
+        player.say("It looks like they've stolen a fair bit of Cargo.");
+    }
 }
 
+class Crate3 extends Object {
+    function new(x,y){
+        super (x,y);
+        customName = "Crago";
+        layer = BACK;
+
+    }
+    function look(){
+        player.say("Looks like they started to run out of places to put the cargo");
+    }
+}
 
 //Hallway2
 class Rust1 extends Object {
@@ -459,6 +473,16 @@ class Rust1 extends Object {
         customName = "Rust";
     }
 
+    function look (){
+        player.say("This ship has seen better days");
+    }
+}
+
+class Rust2 extends Object{
+    function new (x,y){
+        super (x,y);
+        customName = "Rust";
+    }
     function look (){
         player.say("This ship has seen better days");
     }
@@ -498,6 +522,13 @@ class Sign extends Object{
     }
 }
 
+//Hallway5
+class Cocksign extends Object{
+    function new(x,y){
+        super(x,y);
+        customName = "Cockpit";
+    }
+}
 
 //Small Objects
 
@@ -567,6 +598,12 @@ class Hammer extends SmallObject{
             player.say("That doesnt seem like a good idea");
 
         }
+        if (other.n =="Rust"){
+            player.say("It's gonna take more than a hammer to fix this rust.");
+        }
+        if (other.n =="Cargo Container"){
+            player.say("I dont want to damage this Cargo any futher than it already has");
+        }
     }
 }
 
@@ -591,10 +628,20 @@ class Screwdriver extends SmallObject{
     player.say("If I find some loose screws I'll have the right tool for the job");
     }
     function useOn(other:Character){
-        if(other.n=="Controls" && game._underattack == true){
-            game.switchRoom("Spacebattle",128,32);
+        var _screwsods = function() {
+            var _sods = cast(currentRoom.get("sodsbury"),Sodsbury);
+            _sods.say("Ow, stop that");
         }
-    }
+            if(other.n=="Controls" && game._underattack == true){
+                game.switchRoom("Spacebattle",128,32);
+            }
+            if(other.n == "sodsbury"&&cast(other,Sodsbury).alive == true){
+            player.walkTo(other.tileX()-4, _screwsods);
+            }
+            if(other.n == "sodsbury"&&cast(other,Sodsbury).alive == false){
+                player.say("That would be needlessly cruel");
+            }
+        }
 
 }
 
@@ -927,6 +974,7 @@ class Spacestation extends Object {
         animation.play("_idle");
         layer = FORE;
         updateHitbox();
+        customName = "Spaceport";
     }
     public override function update(d){
         super.update(d);
@@ -934,3 +982,15 @@ class Spacestation extends Object {
     }
 }
 
+class Pshipstop extends Character {
+    function new (x,y){
+        super (x,y);
+    }
+}
+
+class Spaceframe extends Object {
+    function new (x,y){
+        super (x,y);
+        layer = FORE;
+    }
+}

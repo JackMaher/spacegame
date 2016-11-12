@@ -46,7 +46,9 @@ class Hallway3 extends Room{
                         new RightDoor (106,0),
                         new LeftDoor(-11,0),
                         new RoomTrigger(120,"Hallway4",0,15),
-                        new Window1(36,8)];
+                        new Window1(36,8),
+                        new Rust2(16,1)];
+
     }
 }
 
@@ -78,11 +80,12 @@ class Hallway5 extends Room {
         objects = [new LeftDoor(-11,0),
                   new Sodsbury(80,20),
                    new Player(15,15),
-                   new SmallObject(40,0),
+                   new Cocksign(65,13),
                    new RoomTrigger(-10,"Hallway4",100,15),
                    new RightDoor (106,0),
                    new Block(116),
-                   new Cockdoor(43,8, "Cockpit",17,14)];
+                   new Cockdoor(43,8, "Cockpit",17,14),
+                   new Crate3(78,10)];
     }
     function enter() {
         //getCharacter("sodsbury").walkToObject("player");
@@ -154,12 +157,13 @@ class Cockpit extends Room{
 }
 
 class Spacebattle extends Room{
+    public var _psstop:Pshipstop ; 
     public function new(){
         super();
         origin.x = 0;
         loadGraphic("assets/images/spacebattle.png", true, 195, 88);
-        animation.add("go", [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32],4,false);
-        animation.add("stop",[32],0);
+        animation.add("go", [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],4,false);
+        animation.add("stop",[31],0);
         animation.add("start",[0],0);
         animation.play("start");
         updateHitbox();
@@ -173,23 +177,45 @@ class Spacebattle extends Room{
         objects = [new Player(1,1),
                     new Spacestation(124,4),
                     new FadeinSpace(0,0),
-                    new Pship(32,16)
+                    new Pship(32,16),
+                    new Pshipstop(143,25),
+                    new Spaceframe(0,0),
                     //new Playership(32,16)
         ];
     }
+
+    function cutscene4(){
+        _psstop.say("I think this is the start of my actual life.");
+        game.canInteract = false;
+    }
+
+    function cutscene3(){
+        _psstop.say("got my own ship, full of Cargo, albeit stolen Cargo");
+        wait(3,cutscene4);
+    }
+    function cutscene2(){
+        _psstop.say("I guess I can start my new life now my lifes not in danger");
+        wait (3, cutscene3);
+
+    }
     function cutscene1 (start){
+        _psstop = cast(currentRoom.get("pshipstop"),Pshipstop);
         animation.finishCallback = null;
         animation.play("stop");
+        _psstop.say("What do I do now?");
+        wait(3,cutscene2);
     }
     function cutscene(){
         animation.play("go");
         animation.finishCallback = cutscene1;
+
     }
 
   public  function Enterspace (){
     var _ps=cast(currentRoom.get("pship"),Pship);
     if (cast(currentRoom.get("fadeinspace"),FadeinSpace).done == true){
         _ps.say("I guess I just jam this screw driver into here, and go?",null,5);
+        FlxG.camera.shake(0.005,1);
         wait(5,cutscene);
         }
     } 
