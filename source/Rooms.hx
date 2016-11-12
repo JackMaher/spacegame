@@ -17,7 +17,10 @@ class Hallway1 extends Room{
                         new RightDoor (106,0),
                         new LeftDoor(-11,0),
                         new ShipDoor(20,8,"Captinsroom", 112,29),
-                        new Player(0,0)];
+                        new Player(0,0),
+                        new Block(7),
+                        new Table(59,21),
+                        new Tv(59,8)];
     }
 }
 
@@ -119,7 +122,10 @@ class Captinsroom extends Room{
     override public function create (){
         objects = [new Player(0,0),
                     new ShipDoor(103,22, "Hallway1",29,15),
-                    new Terminal(18,25)];
+                    new Terminal(38,25),
+                    new Block (133),
+                    new Block(8),
+                    new Sleepingpod(4,9),];
     }
 }
 
@@ -133,7 +139,8 @@ class Powerroom extends Room{
                     new Ladder(168,2),
                     new Powercrate(180,53),
                     new Block(192),
-                    new Block(139)
+                    new Block(139),
+
         ];
     }
 
@@ -147,7 +154,9 @@ class Cockpit extends Room{
         objects = [new Player(1,1),
                     new ShipDoor(14,7,"Hallway5",46,16),
                     new Railing(4,27),
-                    new Cockpc(75,17)];
+                    new Cockpc(75,17),
+                    new Block (1),
+                    new Block(76)];
     }
     function enter (){
         if (game._underattack == true){

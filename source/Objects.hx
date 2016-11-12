@@ -630,7 +630,7 @@ class Screwdriver extends SmallObject{
     function useOn(other:Character){
         var _screwsods = function() {
             var _sods = cast(currentRoom.get("sodsbury"),Sodsbury);
-            _sods.say("Ow, stop that");
+            _sods.say("Ow, stop that",FlxColor.ORANGE);
         }
             if(other.n=="Controls" && game._underattack == true){
                 game.switchRoom("Spacebattle",128,32);
@@ -645,6 +645,24 @@ class Screwdriver extends SmallObject{
 
 }
 
+class Table extends Object {
+    function new(x,y){
+        super (x,y);
+        customName = "Table";
+    }
+    function look(){
+        player.say("This must be where the crew ate, all two of them");
+    }
+}
+class Tv extends Object{
+    function new(x,y){
+        super(x,y);
+        customName = "HoloTV";
+    }
+    function look (){
+        player.say("HoloTV must be broken");
+    }
+}
 class LeftDoor extends Object {
     function new(x,y) {
         super(x,y);
@@ -652,7 +670,15 @@ class LeftDoor extends Object {
         layer = FORE;
     };
 }
-
+class Sleepingpod extends Object {
+    function new(x,y){
+        super(x,y);
+        customName = "Sleeping Pod";
+    }
+    function look (){
+        player.say("Atleast he passed away while sleeping");
+    }
+}
 class RightDoor extends Object {
     function new(x,y) {
         super(x,y);
@@ -807,6 +833,7 @@ class Ladder extends Object{
 class Terminal extends Character{
     function new(x,y){
         super(x,y);
+        layer= BACK;
     }
 
     function _warning2(){
@@ -837,6 +864,10 @@ class Railing extends Object{
     function new(x,y){
         super(x,y);
         layer = FORE;
+        customName = "Railings";
+    }
+    function look(){
+        player.say("These railings are barely being held together");
     }
 }
 
