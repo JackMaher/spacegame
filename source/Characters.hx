@@ -165,12 +165,12 @@ class Sodsbury extends Character {
             wait(3,op1_wait);
         }
         function op1_wait(){
-            say("The power generator failed after a rival smugger shot at us.",FlxColor.ORANGE,4);
+            say("The power generator failed after a rival smuggler shot at us.",FlxColor.ORANGE,4);
             say("it depleted all of the helium from the ship.",FlxColor.ORANGE,4);
             wait(4,op1_1);
         }
         function op1_1(){
-            say("The Roadmanion breath a combination of helium and oxygen",FlxColor.ORANGE,4);
+            say("The Roadmanion breathe a combination of helium and oxygen",FlxColor.ORANGE,4);
             wait(4,op1_2);
         }
         function op1_2(){

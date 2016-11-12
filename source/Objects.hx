@@ -84,12 +84,12 @@ class Cutcreen extends Object {
         }
 
         function cut12(){
-            p4.say("-Few hours later-");
+            p4.say("-Some hours later-");
             wait(3,cut13);
         }
 
         function cut11(){
-            player.say("Oh god whats going on");
+            player.say("Oh god what's going on");
             wait(4,cut12);
         }
 
@@ -101,13 +101,13 @@ class Cutcreen extends Object {
 
         function cut9(){
             FlxG.camera.shake(0.005,0.5);
-            p3.say("Crew is taken care of and the ship is set to crash into the nearly metor, the perfect crime", FlxColor.GREEN,4);
+            p3.say("Crew is taken care of and the ship is set to crash into the nearby metor, the perfect crime", FlxColor.GREEN,4);
             wait(5,cut10);
         }
 
         function cut8(){
             FlxG.camera.shake(0.005,0.5);
-            p1.say("The ship is under attack find somewhere to hide",FlxColor.PURPLE);
+            p1.say("The ship is under attack, find somewhere to hide",FlxColor.PURPLE);
             wait(5,cut9);
         }
 
@@ -238,7 +238,7 @@ class Deadfadeout extends Object {
             _rp.say(" more on this story at 9.",FlxColor.RED,5);
             }
             function rp2(){
-                _rp.say(" casuing a devastating explosions killing everyone onbord,",FlxColor.RED,5);
+                _rp.say(" casuing a devastating explosion killing everyone onbord,",FlxColor.RED,5);
                 wait(5,rp3);
             }
             function rp1(){
@@ -457,7 +457,7 @@ class Crate2 extends Object {
 class Crate3 extends Object {
     function new(x,y){
         super (x,y);
-        customName = "Crago";
+        customName = "Cargo";
         layer = BACK;
 
     }
@@ -840,7 +840,7 @@ class Terminal extends Character{
         game.canInteract = true;
     }
     public function _warning(){
-        say("Captin to Cockpit, the ship is under sttack", FlxColor.RED);
+        say("Captain to Cockpit, the ship is under attack", FlxColor.RED);
         game._underattack = true;
         wait(1,_warning2);
 
