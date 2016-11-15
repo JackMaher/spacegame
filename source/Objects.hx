@@ -55,6 +55,29 @@ class Person5 extends Character{
     }
 }
 
+
+
+class Ecutscene extends Object {
+    public var _fadeout = false;
+    function new(x,y){
+        super(x,y);
+        layer = FORE;
+        alpha = 0;
+    }
+    public override function update (d){
+        super.update(d);
+        if (_fadeout == true){
+            alpha += 0.005;
+            if(alpha >= 1){
+                _fadeout = false;
+                //cutStart();
+            }
+        }
+    }
+}
+
+
+
 class Cutcreen extends Object {
     public var _fadeout = false;
     function new(x,y){
@@ -310,6 +333,13 @@ class Bedroompc extends Character {
     
 }
 
+class Endingchar extends Character{
+    function new (x,y){
+        super(x,y);
+        hidden = true;
+    }
+}
+
 class Bedroomcrate extends Object{
     public var _bedtrigger:Bool = false;
     function new (x,y){
@@ -549,18 +579,20 @@ class Hammer extends SmallObject{
             }
 
                 var move1 = function() {
-                if(other.n == "sodsbury"){
+                if(other.n == "Sodsbury"){
                     cast(other,Sodsbury).kill();
                 }
             }
 
             var _startSwing = function (){
                 player._swing = true;
-                if(other.n == "sodsbury") player.flipX = false;
+                if(other.n == "Sodsbury") player.flipX = false;
                 wait(0.5, move1);
                 wait(1,_stopSwing);
             }
 
+        if(other.n=="Table") player.say("Why would I want to break a set of perfectly function table and chairs?");
+        if(other.n=="HoloTV") player.say("It can't get any more broken");
 
         if(other.n == "Crewmember") {
             function _crewmember(){
@@ -579,12 +611,32 @@ class Hammer extends SmallObject{
             player.walkTo(other.tileX() + 7, dead1);
 
         }
-        if(other.n =="Manhole"){
-            trace("bong");
-            cast(other,Manhole).Open();
+        if(other.n == "Sleeping Pod"){
+            function pod3(){
+                player.say("Coudnt even make a dent");
+            }
+            function pod2(){
+                _startSwing();
+                wait(2,pod3);
+            }
+            function pod1(){
+                player._canControl = false;
+                player.say("Sorry 'bout this");
+                wait(2,pod2);
+            }
+            player.walkTo(other.tileX()+5,pod1);
         }
 
-        if (other.n == "sodsbury"){
+
+        function _manOpen(){
+            cast(other,Manhole).Open();
+        }
+        if(other.n =="Manhole"){
+            player.walkTo(other.tileX()-4, _manOpen);
+            trace("bong");
+        }
+
+        if (other.n == "Sodsbury"){
             player.walkTo(other.tileX()-4, _startSwing);
             cast(other,Sodsbury).flipX = false;
             player._canControl = false;
@@ -595,7 +647,7 @@ class Hammer extends SmallObject{
         }
 
         if(other.n == "Window"){
-            player.say("That doesnt seem like a good idea");
+            player.say("That doesn't seem like a good idea");
 
         }
         if (other.n =="Rust"){
@@ -627,22 +679,34 @@ class Screwdriver extends SmallObject{
     function look(){
     player.say("If I find some loose screws I'll have the right tool for the job");
     }
+    function _ending (){
+        game.switchRoom("Spacebattle",128,32);
+    }
+    function _startScrew (){
+                player._screw = true;
+                wait(1,_ending);
+    }
     function useOn(other:Character){
         var _screwsods = function() {
-            var _sods = cast(currentRoom.get("sodsbury"),Sodsbury);
+            var _sods = cast(currentRoom.get("Sodsbury"),Sodsbury);
             _sods.say("Ow, stop that",FlxColor.ORANGE);
         }
             if(other.n=="Controls" && game._underattack == true){
-                game.switchRoom("Spacebattle",128,32);
+                player.walkTo(other.tileX()-9, _startScrew);
             }
-            if(other.n == "sodsbury"&&cast(other,Sodsbury).alive == true){
+            if(other.n == "Sodsbury"&&cast(other,Sodsbury).alive == true){
             player.walkTo(other.tileX()-4, _screwsods);
             }
-            if(other.n == "sodsbury"&&cast(other,Sodsbury).alive == false){
+            if(other.n == "Sodsbury"&&cast(other,Sodsbury).alive == false){
                 player.say("That would be needlessly cruel");
             }
+            if(other.n=="Computer") player.say("I dont want to break this any futher");
+            if(other.n=="Bay Door") player.say ("We're gonna need a bigger Screwdriver");
+            if(other.n=="HoloTV") player.say("I dont even know where to begin fixing this");
+            if(other.n=="terminal"&& Powerpc._powerOn == true)player.say("I only just got it working, I dont want to break it");
+            if(other.n=="terminal"&& Powerpc._powerOn == false)("Terminal doesn't seem to be broken, just needs some power");
         }
-
+        
 }
 
 class Table extends Object {
@@ -741,7 +805,7 @@ class Manhole extends Object {
     public function Open(){
         animation.play("opened");
         if(Opened != true){
-            player.say("I pryed the cover opened");
+            player.say("I pryed the hatch opened");
         }
         Opened = true;
     }
@@ -755,18 +819,18 @@ class Manhole extends Object {
     }
 
     function look(){
-        if (Opened == false){
-        player.say("The lid doesnt want to budge");
-        }
-        else {
+        if (Opened == false)
+        player.say("The lid doesn't want to budge");
+        
+        else 
             player.say("Its a long way down");
-        }
+        
     }
 
 }
 
 class Powerpc extends Character {
-    public static var _powerOn:Bool = false;
+    public static var _powerOn:Bool = true;
     public var pcOn:Bool = false;
     function new(x,y) {
         super(x,y);
@@ -816,9 +880,11 @@ class Cockdoor extends Door{
         super.update(d);
         if (Powerpc._powerOn == true){
             locked = false;
+
         }
     }
 }
+
 
 class Ladder extends Object{
     function new(x,y){
@@ -913,20 +979,24 @@ class Cockwindow extends Object {
 }
 
 class Cockpc extends Character{
-    var startedChat:Bool = false;
+    public var startedChat:Bool = false;
 
     function new (x,y){
         super(x,y);
+        layer = BACK;
         customName = "Controls";
     }
     function use(x,y){
         if (game._underattack == true && startedChat == false){
+            startCov();
+        }
+    }
+    public function startCov(){
             player.animation.play("idle");
             startedChat = true;
             say("Captain Schmuggler we have you surrounded.",null,4);
             say("There no chance of you getting away this time!",null,4);
             wait(4, characterResponds);
-        }
     }
     function characterResponds(){
         player.say("The Captain is dead, I'm the only one person alive",null,4);
@@ -938,7 +1008,7 @@ class Cockpc extends Character{
         wait(4, characterResponds1);
     }
     function characterResponds1(){
-        player.say("I'm not a Roadmanion, I'm human I stowaway on the ship before the crew died!",null,4);
+        player.say("I'm not a Roadmanion, I'm human I stowaway on the ship before the crew died",null,4);
         wait (4, attack2);
     }
     function attack2(){
@@ -950,7 +1020,7 @@ class Cockpc extends Character{
     function characterResponds2(){
         player.option("Please, you have to believe me",attack3);
         player.option("See you in hell",attack3);
-        player.option("-Yaourself- I need to get this ship moving", attack3);
+        player.option("-Yourself- I need to get this ship moving", attack3);
     }
     function attack3() {
         wait(3,attack3_wait);

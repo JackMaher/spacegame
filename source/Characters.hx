@@ -11,6 +11,7 @@ class Player extends Character {
     public var _canControl = true;
     public var _dead = false;
     public var _moving = false;
+    public var _screw = false;
 
     public function new(x,y):Void {
 
@@ -21,6 +22,7 @@ class Player extends Character {
         animation.add("idle", [3,4], 3,false);
         animation.add("swing",[5,6,7],3,false);
         animation.add("dead",[8,9,10,11,12,13,14],7,false);
+        animation.add("screw",[15,16,17],3,false);
     }
 
     private function movement():Void {
@@ -72,9 +74,13 @@ class Player extends Character {
             /*_sndStep.play();*/
             animation.play("lr");
         }
+        else if (_screw){
+            animation.play("screw");
+        }
         else {
             animation.play("idle");
         }
+
         if(Countdown.done && _dead == false){
             _die();
         }
@@ -103,6 +109,10 @@ class Sodsbury extends Character {
     var pickedChip:Bool = false;
     var startedChat:Bool = false;
 
+    override public function isCursorOverPixels():Bool {
+        return overlapsPoint(FlxG.mouse.getPosition());
+    }
+
     public function new(x,y):Void {
         super (x,y);
         loadGraphic ("assets/images/sodsbury.png", true, 21,16);
@@ -112,6 +122,7 @@ class Sodsbury extends Character {
         animation.play("walk");
         walk1();
         walkSpeed = 2;
+        customName = "Sodsbury";
     }
 
 
@@ -142,6 +153,10 @@ class Sodsbury extends Character {
             else if (alive == false && pickedChip == false){
                 R.inv.add(new Bionicchip(0,0));
                 pickedChip = true;
+                player.say("This might be useful");
+            }
+            else if (pickedChip == true){
+                player.say("Goodnight sweet prince");
             }
 
         }

@@ -11,7 +11,7 @@ using Objects;
 
 class TerminalScreen extends FlxGroup {
     //public var _warning = false;
-    var _shipAttacked = false;
+    public var _shipAttacked = false;
     var textRem:String;
     var bg:FlxSprite;
     var textbox:FlxText;
@@ -111,7 +111,7 @@ class TerminalScreen extends FlxGroup {
                          +'TO:${emails[email].to}\n\n'
                          +'${emails[email].body}';
             case PASSWORD:
-                textRem = '(b) back\n\nEnter passcode for ventilation system:\n\n  ';
+                textRem = '(b) back\n\nEnter 4 digit pincode for ventilation system:\n\n  ';
                 locked = false;
             case CONTROL:
                 textRem = '(b) back\n\nSHIP CONTROL\n\n'

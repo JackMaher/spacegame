@@ -92,11 +92,10 @@ class Door extends Object {
     var newPlayerX:Int=0;
     var newPlayerY:Int=0;
     var touched:Bool = false;
-    var locked:Bool = false;
+    public var locked:Bool = false;
     var lockedText:String = "It's locked.";
     public function new(x,y,?asset:String) {
         super(x,y);
-        customName = " ";
     }
 
     public override function update(d):Void {
@@ -207,13 +206,13 @@ class Room extends Object {
     }
 
     public function get(O:String):Object {
-        var k = objects.find(function(o){return o.n==O;});
+        var k = objects.find(function(o){return o.n.toLowerCase()==O.toLowerCase();});
         if(k == null) throw ("no object "+O+" in room!");
         return k;
     }
 
     public function getCharacter(O:String):Character {
-        var k = objects.find(function(o){return o.n==O;});
+        var k = objects.find(function(o){return o.n.toLowerCase()==O.toLowerCase();});
         if(k == null) throw ("no object "+O+" in room!");
         return cast(k,Character);
     }

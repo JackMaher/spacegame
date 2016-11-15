@@ -7,6 +7,7 @@ using Lambda;
 using Reflect;
 using Type;
 import flixel.FlxG;
+import flixel.util.FlxColor;
 
 class Hallway1 extends Room{
     public function new(){
@@ -91,7 +92,7 @@ class Hallway5 extends Room {
                    new Crate3(78,10)];
     }
     function enter() {
-        //getCharacter("sodsbury").walkToObject("player");
+        //getCharacter("Sodsbury").walkToObject("player");
     }
 
 }
@@ -161,11 +162,14 @@ class Cockpit extends Room{
     function enter (){
         if (game._underattack == true){
             addObject(new Cockwindow(86,0));
+            cast(get("ShipDoor"),ShipDoor).locked=true;
+            cast(get("Controls"), Cockpc).startCov();
         }
     }
 }
 
 class Spacebattle extends Room{
+    var _rp:Objects.Endingchar;
     public var _psstop:Pshipstop ; 
     public function new(){
         super();
@@ -189,21 +193,39 @@ class Spacebattle extends Room{
                     new Pship(32,16),
                     new Pshipstop(143,25),
                     new Spaceframe(0,0),
-                    //new Playership(32,16)
+                   new Ecutscene(0,0),
+                   new Endingchar(95,43)
+
         ];
     }
+    function cutscene8(){
+        _rp.say("'More on this story at 8'", FlxColor.RED);
+    }
+    function cutscene7(){
+        _rp.say("'We all owe Captain Gunn a massive thanks for being brave, a real life hero by his own accounts'",FlxColor.RED);
+        wait(5,cutscene8);
+    }
+    function cutscene6(){
+        _rp.say("'Tommy Gunn, snuck onto the Captain's ship with the intent on bringing his rain of terror to an end.'",FlxColor.RED);
+        wait(5,cutscene7);
+    }
 
+    function cutscene5(){
+        _rp = cast(currentRoom.get("EndingChar"),Endingchar);
+        _rp.say("'Breaking News renowed pirate Captain Shmuggler was defeated todo along with the rest of his crew in 1 on 1 combat with a humnoid today'",FlxColor.RED);
+        wait (5,cutscene6);
+    }
     function cutscene4(){
-        _psstop.say("I think this is the start of my actual life.");
-        game.canInteract = false;
+        cast(get("Ecutscene"),Ecutscene)._fadeout = true;
+        wait(3,cutscene5);
     }
 
     function cutscene3(){
-        _psstop.say("got my own ship, full of Cargo, albeit stolen Cargo");
+        _psstop.say("a honset life");
         wait(3,cutscene4);
     }
     function cutscene2(){
-        _psstop.say("I guess I can start my new life now my lifes not in danger");
+        _psstop.say("I guess I can start that new life I wanted");
         wait (3, cutscene3);
 
     }
@@ -225,6 +247,7 @@ class Spacebattle extends Room{
     if (cast(currentRoom.get("fadeinspace"),FadeinSpace).done == true){
         _ps.say("I guess I just jam this screw driver into here, and go?",null,5);
         FlxG.camera.shake(0.005,1);
+        game.canInteract = false;
         wait(5,cutscene);
         }
     } 

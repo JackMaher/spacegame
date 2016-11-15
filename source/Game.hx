@@ -18,7 +18,7 @@ using Lambda;
 class Game extends FlxState {
 
     public static var ROOM_HEIGHT:Int;
-    public var _underattack = false;
+    public var _underattack = true;
     public static var ROOM_TOP:Int;
     public static var SCALE_FACTOR:Int = 8;
     public var currentRoom:Room;
