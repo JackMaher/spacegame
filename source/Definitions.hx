@@ -96,6 +96,7 @@ class Door extends Object {
     var lockedText:String = "It's locked.";
     public function new(x,y,?asset:String) {
         super(x,y);
+        hideName = true;
     }
 
     public override function update(d):Void {
@@ -186,6 +187,7 @@ class Room extends Object {
         for(o in objects) {
             cast(FlxG.state,Game).layers.get(o.layer).remove(o);
             if(o.is(Character)) cast(o,Character).clearSpeeches();
+            o.killTimers();
         }
         if(field("leave") != null)
             callMethod(field("leave"), []);
@@ -257,6 +259,7 @@ class Object extends FlxSprite {
     public var player(get,never):Player;
     public var layer(default,set):Layer;
     public var game(get,never):Game;
+    public var hideName:Bool = false;
     var timers:Array<FlxTimer> = [];
     var gameX:Int;
     public var hidden:Bool = false;
@@ -346,6 +349,10 @@ class Object extends FlxSprite {
     }
 
     public function die() {
+        killTimers();
+    }
+
+    public function killTimers() {
         for(t in timers) {
             t.destroy();
         }

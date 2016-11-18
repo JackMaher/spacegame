@@ -76,8 +76,7 @@ class Game extends FlxState {
     override public function update(elapsed:Float):Void {
         super.update(elapsed);
 
-        if(FlxG.keys.justPressed.Q) Sys.exit(0);
-
+        //if(FlxG.keys.justPressed.Q) Sys.exit(0);
         if(FlxG.keys.justPressed.F) currentRoom.getCharacter("player").say("Hello");
 
         if(canInteract) {
@@ -92,7 +91,7 @@ class Game extends FlxState {
             });
             if(k != null) {
                 if(k.n != nameText.text) {
-                    nameText.text = k.n;
+                    nameText.text = (if (k.hideName) "" else k.n);
                     nameText.fieldWidth = 1000;
                     nameText.offset.x = 0;
                     nameText.setBorderStyle(OUTLINE,0xff000000,2);

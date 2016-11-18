@@ -287,6 +287,10 @@ class Deadfadeout extends Object {
 
 class Bedroompc extends Character {
     var startedChat:Bool = false;
+    public override function killTimers() {
+        startedChat = false;
+        super.killTimers();
+    }
     function new(x,y){
         super(x,y);
         customName = "PC";
@@ -296,6 +300,7 @@ class Bedroompc extends Character {
         player.say("My vintage Cathode Ray Tubed Personal Computer");
     }
     function use(){
+        cast(currentRoom.get("bedtrigger"),Bedtrigger).allow = true;
         if (pixelDistance(player) < 4 && startedChat == false){
             startedChat = true;
             say("Dear Richard Sparrow",FlxColor.GRAY,4);
@@ -315,7 +320,7 @@ class Bedroompc extends Character {
     }
     function bedroom2 (){
         player.say("Great, fired again! Steven is such a jerk. it wasn't even that serious,",null,4);
-        player.say(" just one minor engine-room meltdown!",null,4); 
+        player.say(" just one minor engine-room meltdown!",null,4);
         wait (5, bedroom3);
     }
     function bedroom3(){
@@ -330,7 +335,7 @@ class Bedroompc extends Character {
         startedChat = false;
         game.canInteract = true;
     }
-    
+
 }
 
 class Endingchar extends Character{
@@ -362,12 +367,14 @@ class Bedroomcrate extends Object{
 
 class Bedtrigger extends Object{
     var done = false;
+    public var allow = false;
     function new (x,y){
         super(x,y);
+        hidden = true;
     }
     override public function update (d){
         super.update(d);
-        if (pixelDistance(player) ==0 && done == false){
+        if (pixelDistance(player) ==0 && done == false && allow){
             cast(currentRoom.get("Crate"), Bedroomcrate).collision();
             done = true;
             player._canControl = false;
@@ -706,7 +713,7 @@ class Screwdriver extends SmallObject{
             if(other.n=="terminal"&& Powerpc._powerOn == true)player.say("I only just got it working, I dont want to break it");
             if(other.n=="terminal"&& Powerpc._powerOn == false)("Terminal doesn't seem to be broken, just needs some power");
         }
-        
+
 }
 
 class Table extends Object {
@@ -821,10 +828,10 @@ class Manhole extends Object {
     function look(){
         if (Opened == false)
         player.say("The lid doesn't want to budge");
-        
-        else 
+
+        else
             player.say("Its a long way down");
-        
+
     }
 
 }
@@ -1046,6 +1053,10 @@ class Cockpc extends Character{
         player.ending1();
     }
 
+    public override function killTimers() {
+        startedChat = false;
+        super.killTimers();
+    }
 }
 
 

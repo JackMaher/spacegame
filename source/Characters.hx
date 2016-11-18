@@ -68,7 +68,7 @@ class Player extends Character {
             animation.play("swing");
         }
         else if(_dead){
-        
+
         }
         else if (_moving){
             /*_sndStep.play();*/
@@ -125,6 +125,10 @@ class Sodsbury extends Character {
         customName = "Sodsbury";
     }
 
+    public override function killTimers() {
+        startedChat = false;
+        super.killTimers();
+    }
 
         public override function update(d){
             super.update(d);
