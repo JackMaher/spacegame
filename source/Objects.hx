@@ -830,7 +830,7 @@ class Manhole extends Object {
 }
 
 class Powerpc extends Character {
-    public static var _powerOn:Bool = true;
+    public static var _powerOn:Bool = false;
     public var pcOn:Bool = false;
     function new(x,y) {
         super(x,y);

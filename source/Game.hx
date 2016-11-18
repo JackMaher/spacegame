@@ -18,7 +18,7 @@ using Lambda;
 class Game extends FlxState {
 
     public static var ROOM_HEIGHT:Int;
-    public var _underattack = true;
+    public var _underattack = false;
     public static var ROOM_TOP:Int;
     public static var SCALE_FACTOR:Int = 8;
     public var currentRoom:Room;
@@ -55,7 +55,7 @@ class Game extends FlxState {
         layers.set(Definitions.Layer.CHAR, charLayer);
         layers.set(Definitions.Layer.FORE, foreLayer);
 
-            switchRoom("Cargo");
+            switchRoom("Bedroom");
 
         add(mouse=new FlxSprite(FlxG.width/2,850).loadGraphic("assets/images/mouse.png"));
         mouse.origin.set(mouse.width/2,0);

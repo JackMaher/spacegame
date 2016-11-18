@@ -212,7 +212,8 @@ class Spacebattle extends Room{
 
     function cutscene5(){
         _rp = cast(currentRoom.get("EndingChar"),Endingchar);
-        _rp.say("'Breaking News renowed pirate Captain Shmuggler was defeated todo along with the rest of his crew in 1 on 1 combat with a humnoid today'",FlxColor.RED);
+        _rp.say("'Breaking News renowed pirate Captain Schmuggler was defeated todo along",FlxColor.RED);
+        _rp.say(" with the rest of his crew in 1 on 1 combat with a humnoid today'",FlxColor.RED);
         wait (5,cutscene6);
     }
     function cutscene4(){
